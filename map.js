@@ -11,11 +11,11 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 L.marker([43.01007, -7.55834]).addTo(mymap);
 
-L.circle([43.01207, -7.55834], {
+L.circle([43.01007, -7.55834], {
 	color: 'red',
 	fillColor: '#f03',
-	fillOpacity: 0.4,
-	radius: 500
+	fillOpacity: 0.2,
+	radius: 150
 }).addTo(mymap);
 
 L.polygon([
@@ -23,3 +23,13 @@ L.polygon([
 	[51.503, -0.06],
 	[51.51, -0.047]
 ]).addTo(mymap);
+/* Different views from https://docs.mapbox.com/api/maps/styles/
+mapbox://styles/mapbox/outdoors-v11
+mapbox://styles/mapbox/streets-v11
+mapbox://styles/mapbox/light-v10
+mapbox://styles/mapbox/dark-v10
+mapbox://styles/mapbox/satellite-v9
+mapbox://styles/mapbox/satellite-streets-v11
+mapbox://styles/mapbox/navigation-day-v1
+mapbox://styles/mapbox/navigation-night-v1
+*/
