@@ -1,16 +1,20 @@
-var mymap = L.map('map').setView([43.01007, -7.55834], 10);
-var gpx = './Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
-new L.GPX(gpx, {
+const cabecera = document.getElementById('cabecera');
+
+var mymap = L.map('map').setView([44.01007, -7.55834]);
+var gpx = './tracks/LUGO_ALMERIA.gpx'; // URL to your GPX file or the GPX itself
+let route = new L.GPX(gpx, {
 	async: true,
 	marker_options: {
-		startIconUrl: 'images/pin-icon-start.png',
-		endIconUrl: 'images/pin-icon-end.png',
+		startIconUrl: 'images/start2.png',
+		endIconUrl: 'images/finish.png',
 		shadowUrl: 'images/pin-shadow.png'
 	  }
-}).on('loaded', function(e) {
-  map.fitBounds(e.target.getBounds());
-  console.log(e.target.getBounds());
+});
 
+route.on('loaded', function(e) {
+  mymap.fitBounds(e.target.getBounds());
+  cabecera.textContent="Ruta: "+e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms";
+  console.log(e.target._info.name);
 }).addTo(mymap);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -40,7 +44,10 @@ L.polygon([
 ]).addTo(mymap);
 
 
-
+route.on('loaded', function(e) {
+	mymap.fitBounds(e.target.getBounds());
+	cabecera.textContent="Ruta: "+e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms";	
+}).addTo(mymap);
 /* Different views from https://docs.mapbox.com/api/maps/styles/
 mapbox://styles/mapbox/outdoors-v11
 mapbox://styles/mapbox/streets-v11
