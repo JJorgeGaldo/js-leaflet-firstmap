@@ -9,7 +9,9 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 	zoomOffset: -1
 }).addTo(mymap);
 
-L.marker([43.01007, -7.55834]).addTo(mymap);
+L.marker([43.01007, -7.55834],{
+	title: "Horizonte de sucesos"
+}).addTo(mymap);
 
 L.circle([43.01007, -7.55834], {
 	color: 'red',
@@ -23,6 +25,7 @@ L.polygon([
 	[51.503, -0.06],
 	[51.51, -0.047]
 ]).addTo(mymap);
+
 /* Different views from https://docs.mapbox.com/api/maps/styles/
 mapbox://styles/mapbox/outdoors-v11
 mapbox://styles/mapbox/streets-v11
