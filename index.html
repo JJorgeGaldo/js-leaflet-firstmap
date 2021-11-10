@@ -8,27 +8,41 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
 
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
 		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 		<style>
-			#cabecera{
+			#nomRuta,#cabecera{
 				text-align: center;
 			}
 			#map{
 				margin: 0 auto;
-				height: 70vh;
+				height: 78vh;
 				width: 90vw;
 			}
 		</style>
-		
+
 	</head>
 	<body>
 
-		<h1 id="cabecera">Mapa de Lugo en Open Street Maps</h1>
+		<h2 id="cabecera">Selecciona la ruta 
+			<span>
+				<select id="rutas">
+					<option value="0"> </option>
+					<option value="1">Viveiro - Porto de Bares</option>
+					<option value="2">Viveiro 4 Picos</option>
+					<option value="3">Lugo - Almería</option>
+					<option value="4">Lugo - Cádiz (por Portugal)</option>
+				</select>
+			</span>
+			<span>
+				<button id="show">Mostrar</button>
+			</span>
+		</h2>
+		<h1 id="nomRuta"></h1>
 
 		<div id="map"></div>
 		<script src="./map.js"></script>
