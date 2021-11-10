@@ -49,39 +49,31 @@ showBtn.onclick = (e) =>{
 	paintMap();
 	mymap.eachLayer(function(layer){
 		layer.remove();
-		//console.log(layer.getPane());
+		//console.log(layer.getPane()); // To show the each layer that is rendering
 	});
 	paintMap();
 	console.log(rutas);
 	e.preventDefault;
 	switch(rutas.value){
 		case '0':
-			mymap = L.map('map').setView([44.01007, -7.55834]); // URL to your GPX file or the GPX itself
+			paintMap(); 
 			console.log(gpx);
 			break;
 		case '1':
-			gpx = '';
-			console.log("I'm IN");
-			gpx = './tracks/Viveiro_Bares.gpx';
+			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
 			rutas.value = 0;
-			console.log(gpx);
 			break;
 		case '2':
-			gpx = '';
-			console.log(gpx);
-
 			gpx = './tracks/Viveiro_4Picos.gpx';
-			console.log(gpx);
+			rutas.value = 0;
 			break;
 		case '3':
-			gpx = '';
 			gpx = './tracks/LUGO_ALMERIA.gpx';
-			console.log(gpx);
+			rutas.value = 0;
 			break;
 		case '4':
-			gpx = '';
 			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
-			console.log(gpx);
+			rutas.value = 0;
 			break;
 	}
 	
