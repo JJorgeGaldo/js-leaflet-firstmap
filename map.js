@@ -44,7 +44,13 @@ console.log("paso4");
 /* Painting the Routes */
 
 showBtn.onclick = (e) =>{
-	let gpx = '';
+	//let gpx = '';
+	//mymap.remove();
+	paintMap();
+	mymap.eachLayer(function(layer){
+		layer.remove();
+		//console.log(layer.getPane());
+	});
 	paintMap();
 	console.log(rutas);
 	e.preventDefault;
@@ -57,12 +63,12 @@ showBtn.onclick = (e) =>{
 			gpx = '';
 			console.log("I'm IN");
 			gpx = './tracks/Viveiro_Bares.gpx';
+			rutas.value = 0;
 			console.log(gpx);
 			break;
 		case '2':
 			gpx = '';
 			console.log(gpx);
-			paintMap();
 
 			gpx = './tracks/Viveiro_4Picos.gpx';
 			console.log(gpx);
@@ -78,7 +84,7 @@ showBtn.onclick = (e) =>{
 			console.log(gpx);
 			break;
 	}
-
+	
 	console.log(gpx);
 	let route = new L.GPX(gpx, {
 		async: true,
@@ -88,16 +94,13 @@ showBtn.onclick = (e) =>{
 			shadowUrl: ''
 		}
 	});
-
+	
 	route.on('loaded', function(e) {
 		mymap.fitBounds(e.target.getBounds());
 		nomRuta.textContent="Ruta: "+e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms";
-		console.log(e.target._info.name);
-	}).addTo(mymap);
-
-	paintMap();
+		console.log(e.target._info);
+	}).addTo(mymap);	
 	
-
 }
 
 
