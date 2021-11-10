@@ -63,7 +63,7 @@ showBtn.onclick = (e) =>{
 			rutas.value = 0;
 			break;
 		case '3':
-			gpx = './tracks/LUGO_ALMERIA.gpx';
+			gpx = './tracks/Lugo-Castro-Castroverde-Lugo.gpx';
 			rutas.value = 0;
 			break;
 		case '4':
@@ -82,9 +82,9 @@ showBtn.onclick = (e) =>{
 	});
 	
 	route.on('loaded', function(e) {
-		console.log(e.target.getBounds());
+		console.log(e.target);
 		mymap.fitBounds(e.target.getBounds());
-		nomRuta.textContent="Ruta: "+e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms";
+		nomRuta.textContent="Ruta: "+e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
 		console.log(e.target._info);
 	}).addTo(mymap);	
 	
