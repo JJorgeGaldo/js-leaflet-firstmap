@@ -14,45 +14,40 @@ function paintMap(){
 		tileSize: 512,
 		zoomOffset: -1
 	}).addTo(mymap);
-console.log("paso1");
 }
 
 var mymap = L.map('map').setView([43.01007, -7.55834], 15);
 paintMap();
 
-
 L.marker([43.01007, -7.55834],{
 	title: "Horizonte de sucesos"
 }).addTo(mymap);
-console.log("paso2");
 L.circle([43.01007, -7.55834], {
 	color: 'red',
 	fillColor: '#f03',
 	fillOpacity: 0.2,
 	radius: 150
 }).addTo(mymap);
-console.log("paso3");
 L.polygon([
 	[51.509, -0.08],
 	[50.503, -0.06],
 	[51.51, -0.147]
 ]).addTo(mymap);
-console.log("paso4");
 
 
 
 /* Painting the Routes */
 
 showBtn.onclick = (e) =>{
-	//let gpx = '';
-	//mymap.remove();
 	paintMap();
+	// First we remove the previous routes
 	mymap.eachLayer(function(layer){
 		layer.remove();
 		//console.log(layer.getPane()); // To show the each layer that is rendering
 	});
+	// Now we repaint the map in which we show the route
 	paintMap();
-	console.log(rutas);
+
 	e.preventDefault;
 	switch(rutas.value){
 		case '0':
@@ -77,7 +72,6 @@ showBtn.onclick = (e) =>{
 			break;
 	}
 	
-	console.log(gpx);
 	let route = new L.GPX(gpx, {
 		async: true,
 		marker_options: {
@@ -88,6 +82,7 @@ showBtn.onclick = (e) =>{
 	});
 	
 	route.on('loaded', function(e) {
+		console.log(e.target.getBounds());
 		mymap.fitBounds(e.target.getBounds());
 		nomRuta.textContent="Ruta: "+e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms";
 		console.log(e.target._info);
