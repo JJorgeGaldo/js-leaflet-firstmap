@@ -15,7 +15,8 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 		<link rel="stylesheet" href="/css/styles.css">
-
+		<!-- Chart js -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</head>
 	<body>
 
@@ -36,8 +37,10 @@
 		<h1 id="nomRuta"></h1>
 
 		<div id="map"></div>
-		
-		<div id="elevation"></div>
+
+		<div>
+			<canvas id="elevation"></canvas>
+		</div>
 		<script src="./map.js"></script>
 
 	  
