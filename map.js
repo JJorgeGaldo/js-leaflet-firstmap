@@ -1,6 +1,7 @@
 const nomRuta = document.getElementById('nomRuta');
 const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
+const elevation = document.getElementById('elevation');
 
 /* Painting the map */
 
