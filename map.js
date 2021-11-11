@@ -69,10 +69,14 @@ showBtn.onclick = (e) =>{
 			rutas.value = 0;
 			break;
 		case '4':
-			gpx = './tracks/LUGO_ALMERIA.gpx';
+			gpx = './tracks/Penarubia-Geodesico.gpx';
 			rutas.value = 0;
 			break;
 		case '5':
+			gpx = './tracks/LUGO_ALMERIA.gpx';
+			rutas.value = 0;
+			break;
+		case '6':
 			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
 			rutas.value = 0;
 			break;
