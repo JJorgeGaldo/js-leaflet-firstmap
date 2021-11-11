@@ -91,9 +91,7 @@ showBtn.onclick = (e) =>{
 		console.log(e.target);
 		mymap.fitBounds(e.target.getBounds());
 		nomRuta.textContent=e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
-		console.log(e.target._info);
-		console.log("Puntos de elevación");
-		console.log(e.target._info.elevation._points[2][0]);
+		
 		if(Math.floor(e.target._info.elevation.gain)){
 			ctxContainer.style.display = "block";
 			drawElevation(e.target._info.elevation._points);
@@ -112,43 +110,49 @@ showBtn.onclick = (e) =>{
 		let dist = [];
 		let elev = [];
 		for(let i = 0; i < rawData.length; i++){
-			dist.push(Math.round(rawData[i][0])/1000);
+			dist.push(((rawData[i][0])/1000).toFixed(2));
 			elev.push(Math.floor(rawData[i][1]));
 		}
-		console.log(dist[1345]);
-		console.log(elev[1345]);
 		const myChart = new Chart(ctx, {
-			type: 'bar',
-			color: '#daa940',
+			type: 'line',
 			data: {
 				labels: dist,
 				datasets: [{
 					label: 'elevation',
 					data: elev,
 					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
+						'#daa940'
+						/* 'rgba(255, 99, 132, 0.2)',
 						'rgba(54, 162, 235, 0.8)',
 						'rgba(255, 206, 86, 0.2)',
 						'rgba(75, 192, 192, 0.2)',
 						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)'
+						'rgba(255, 159, 64, 0.2)' */
 					],
 					borderColor: [
-						'rgba(255, 99, 132, 1)',
+						/* 'rgba(255, 99, 132, 1)',
 						'rgba(54, 162, 235, 1)',
 						'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)',
 						'rgba(153, 102, 255, 1)',
-						'rgba(255, 159, 64, 1)'
+						'rgba(255, 159, 64, 1)' */
 					],
-					color: '#daa940',
-					borderWidth: 1
+					fill: true,
+					//borderWidth: 1
+					
 				}]
 			},
 			options: {
+				responsive: true,
+				legend: {
+					display: false
+				},
+				tooltips: {
+					enabled: false
+				},
 				scales: {
 					y: {
-						beginAtZero: true
+						beginAtZero: false
 					}
 				}
 			}
