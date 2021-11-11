@@ -37,6 +37,7 @@ body{
     max-width: 90vw;
     display: none;
     background-color: white;
+    margin-top: 2vh;
 }
 .button {
 	display: block;

@@ -144,11 +144,10 @@ showBtn.onclick = (e) =>{
 			},
 			options: {
 				responsive: true,
-				legend: {
-					display: false
-				},
-				tooltips: {
-					enabled: false
+				plugins: {
+					legend: {
+						display: false //With this to false doesn't shows the legend
+					}
 				},
 				scales: {
 					y: {
