@@ -114,7 +114,7 @@ showBtn.onclick = (e) =>{
 			elev.push(Math.floor(rawData[i][1]));
 		}
 		const myChart = new Chart(ctx, {
-			type: 'line',
+			type: 'bar',
 			data: {
 				labels: dist,
 				datasets: [{
