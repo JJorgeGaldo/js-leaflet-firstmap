@@ -12,7 +12,7 @@ function paintMap(){
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
 		id: 'mapbox/outdoors-v11',
 		tileSize: 512,
 		zoomOffset: -1
@@ -119,6 +119,7 @@ showBtn.onclick = (e) =>{
 		console.log(elev[1345]);
 		const myChart = new Chart(ctx, {
 			type: 'bar',
+			color: '#daa940',
 			data: {
 				labels: dist,
 				datasets: [{
@@ -126,7 +127,7 @@ showBtn.onclick = (e) =>{
 					data: elev,
 					backgroundColor: [
 						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
+						'rgba(54, 162, 235, 0.8)',
 						'rgba(255, 206, 86, 0.2)',
 						'rgba(75, 192, 192, 0.2)',
 						'rgba(153, 102, 255, 0.2)',
@@ -140,7 +141,7 @@ showBtn.onclick = (e) =>{
 						'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)'
 					],
-					color: 'rgb(255,255,255)',
+					color: '#daa940',
 					borderWidth: 1
 				}]
 			},

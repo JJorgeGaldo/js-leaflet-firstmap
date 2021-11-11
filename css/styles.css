@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(99, 96, 89);
+    background-color: rgb(128, 128, 100);
+    margin: 0;
 }
 #cabecera{
     font-family: 'Courier New', Courier, monospace;
@@ -17,17 +18,22 @@ body{
 } */
 #nomRuta{
     text-align: center;
-    color: rgb(218, 169, 64);
+    color: #daa940;
 }
 #map{
-    border-radius: 3em;
-    margin: 0 auto;
-    height: 58vh;
-    width: 70vw;
+    box-sizing: border-box;
+    height: 75vh;
+    width: 100vw;
+    padding: 6em;
+}
+#attribution{
+    margin-right: 3em;
+    margin-bottom: 3em;
 }
 #outline{
     margin: 0 auto;
     max-width: 80vw;
+    display: none;
 }
 .button {
 	display: block;
