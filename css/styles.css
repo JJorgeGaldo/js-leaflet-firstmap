@@ -52,7 +52,7 @@ body{
     padding: 26px;
     color: white;
     background: #daa940;
-    transition: all 0.2s ease-out 0s;
+    transition: all 0.1s ease-out 0s;
 }
 
 .gradient {
@@ -68,7 +68,7 @@ body{
     background: radial-gradient(90px circle at top center, rgba(238,88,63,.8) 30%, rgba(255,255,255,0));
     transition: all 0s ease-out 0s;
 	transform: translatex(-140px);
-	animation: 18s linear 0s infinite move;
+	animation: 10s linear 0s infinite move;
 }
 
 @keyframes move {

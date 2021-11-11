@@ -41,11 +41,10 @@ L.polygon([
 /* Painting the Routes */
 
 showBtn.onclick = (e) =>{
-	paintMap();
 	// First we remove the previous routes
 	mymap.eachLayer(function(layer){
 		layer.remove();
-		//console.log(layer.getPane()); // To show the each layer that is rendering
+		//console.log(layer.getPane()); // To show each layer that is rendering
 	});
 	// Now we repaint the map in which we show the route
 	paintMap();
@@ -106,8 +105,8 @@ showBtn.onclick = (e) =>{
 		let dist = [];
 		let elev = [];
 		for(let i = 0; i < rawData.length; i++){
-			dist.push(rawData[i][0]);
-			elev.push(rawData[i][1]);
+			dist.push(Math.round(rawData[i][0])/1000);
+			elev.push(Math.floor(rawData[i][1]));
 		}
 		console.log(dist[1345]);
 		console.log(elev[1345]);
@@ -134,6 +133,7 @@ showBtn.onclick = (e) =>{
 						'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)'
 					],
+					color: 'rgb(255,255,255)',
 					borderWidth: 1
 				}]
 			},
