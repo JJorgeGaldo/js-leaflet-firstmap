@@ -25,6 +25,10 @@ body{
     height: 58vh;
     width: 70vw;
 }
+.outline{
+    margin: 0 auto;
+    max-width: 80vw;
+}
 .button {
 	display: block;
     width: 220px;

@@ -2,6 +2,7 @@ const nomRuta = document.getElementById('nomRuta');
 const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
 //const elevation = document.getElementById('elevation');
+const ctx = document.getElementById('elevation').getContext('2d');
 
 /* Painting the map */
 
@@ -89,45 +90,62 @@ showBtn.onclick = (e) =>{
 	route.on('loaded', function(e) {
 		console.log(e.target);
 		mymap.fitBounds(e.target.getBounds());
-		nomRuta.textContent="Ruta: "+e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
+		nomRuta.textContent=e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
 		console.log(e.target._info);
+		console.log("Puntos de elevación");
+		console.log(e.target._info.elevation._points[2][0]);
+		drawElevation(e.target._info.elevation._points);
 	}).addTo(mymap);
+	
 
-	const ctx = document.getElementById('elevation').getContext('2d');
-	const myChart = new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-			datasets: [{
-				label: '# of Votes',
-				data: [12, 19, 3, 5, 2, 3],
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)'
-				],
-				borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)'
-				],
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
+	function drawElevation(rawData){
+		let chartStatus = Chart.getChart('elevation');
+		if (chartStatus != undefined) {
+			chartStatus.destroy();
+		}
+		let dist = [];
+		let elev = [];
+		for(let i = 0; i < rawData.length; i++){
+			dist.push(rawData[i][0]);
+			elev.push(rawData[i][1]);
+		}
+		console.log(dist[1345]);
+		console.log(elev[1345]);
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: dist,
+				datasets: [{
+					label: 'elevation',
+					data: elev,
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)'
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
 				}
 			}
-		}
-	});
+		});
+	}
 	
 }
 
