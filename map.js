@@ -10,7 +10,7 @@ const ctxContainer = document.getElementById('outline');
 
 function paintMap(){
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
+		maxZoom: 20,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
 			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
 		id: 'mapbox/outdoors-v11',
@@ -130,6 +130,7 @@ showBtn.onclick = (e) =>{
 						'rgba(255, 159, 64, 0.2)' */
 					],
 					borderColor: [
+						'rgb(52, 94, 57)'
 						/* 'rgba(255, 99, 132, 1)',
 						'rgba(54, 162, 235, 1)',
 						'rgba(255, 206, 86, 1)',
