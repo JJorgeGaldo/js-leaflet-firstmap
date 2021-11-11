@@ -3,6 +3,7 @@ const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
 //const elevation = document.getElementById('elevation');
 const ctx = document.getElementById('elevation').getContext('2d');
+const ctxContainer = document.getElementById('outline');
 
 /* Painting the map */
 
@@ -93,7 +94,13 @@ showBtn.onclick = (e) =>{
 		console.log(e.target._info);
 		console.log("Puntos de elevación");
 		console.log(e.target._info.elevation._points[2][0]);
-		drawElevation(e.target._info.elevation._points);
+		if(Math.floor(e.target._info.elevation.gain)){
+			ctxContainer.style.display = "block";
+			drawElevation(e.target._info.elevation._points);
+		}else{
+			ctxContainer.style.display = "none";
+		}
+		
 	}).addTo(mymap);
 	
 
