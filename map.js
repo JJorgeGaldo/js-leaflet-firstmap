@@ -19,6 +19,99 @@ function paintMap(){
 	}).addTo(mymap);
 }
 
+function drawRoute(){
+	
+	let route = new L.GPX(gpx, {
+		async: true,
+		marker_options: {
+			startIconUrl: 'images/start3.png',
+			endIconUrl: 'images/finish2.png',
+			shadowUrl: ''
+		}
+	});
+	
+	route.on('loaded', function(e) {
+		console.log(e.target);
+		mymap.fitBounds(e.target.getBounds());
+		nomRuta.textContent=e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
+		
+		if(Math.floor(e.target._info.elevation.gain)){
+			ctxContainer.style.display = "block";
+			drawElevation(e.target._info.elevation._points);
+		}else{
+			ctxContainer.style.display = "none";
+		}
+		
+	}).addTo(mymap);
+}
+
+
+function drawElevation(rawData){
+	let chartStatus = Chart.getChart('elevation');
+	if (chartStatus != undefined) {
+		chartStatus.destroy();
+	}
+	let dist = [];
+	let elev = [];
+	for(let i = 0; i < rawData.length; i++){
+		dist.push(((rawData[i][0])/1000).toFixed(2));
+		elev.push(Math.floor(rawData[i][1]));
+	}
+	var gradient = ctx.createLinearGradient(0,150, 0,1000);
+	gradient.addColorStop(.07, 'rgba(244,112,4,1)');
+	gradient.addColorStop(.3, 'rgba(244,152,4,1)');
+	gradient.addColorStop(.7, 'rgba(215,169,70,1)');
+
+	const myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: dist,
+			datasets: [{
+				label: 'elevation',
+				data: elev,
+				backgroundColor: [
+					gradient
+					/* '#daa940' */
+					/* background: rgb(244,112,4);
+					background: linear-gradient(180deg, rgba(244,112,4,1) 7%, rgba(244,152,4,1) 30%, rgba(215,169,70,1) 70%); */
+					/* 'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.8)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)' */
+				],
+				borderColor: [
+					'rgb(52, 94, 57)'
+					/* 'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)' */
+				],
+				fill: true,
+				//borderWidth: 1
+				
+			}]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					display: false //With this to false doesn't shows the legend
+				}
+			},
+			scales: {
+				y: {
+					beginAtZero: false
+				}
+			}
+		}
+	});
+}
+
+/* Landing map */
 var mymap = L.map('map').setView([43.01007, -7.55834], 15);
 paintMap();
 
@@ -39,8 +132,7 @@ L.polygon([
 
 
 
-/* Painting the Routes */
-
+/* Selecting the Route to show */
 showBtn.onclick = (e) =>{
 	// First we remove the previous routes
 	mymap.eachLayer(function(layer){
@@ -81,88 +173,7 @@ showBtn.onclick = (e) =>{
 			rutas.value = 0;
 			break;
 	}
-	
-	let route = new L.GPX(gpx, {
-		async: true,
-		marker_options: {
-			startIconUrl: 'images/start3.png',
-			endIconUrl: 'images/finish2.png',
-			shadowUrl: ''
-		}
-	});
-	
-	route.on('loaded', function(e) {
-		console.log(e.target);
-		mymap.fitBounds(e.target.getBounds());
-		nomRuta.textContent=e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
-		
-		if(Math.floor(e.target._info.elevation.gain)){
-			ctxContainer.style.display = "block";
-			drawElevation(e.target._info.elevation._points);
-		}else{
-			ctxContainer.style.display = "none";
-		}
-		
-	}).addTo(mymap);
-	
-
-	function drawElevation(rawData){
-		let chartStatus = Chart.getChart('elevation');
-		if (chartStatus != undefined) {
-			chartStatus.destroy();
-		}
-		let dist = [];
-		let elev = [];
-		for(let i = 0; i < rawData.length; i++){
-			dist.push(((rawData[i][0])/1000).toFixed(2));
-			elev.push(Math.floor(rawData[i][1]));
-		}
-		const myChart = new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: dist,
-				datasets: [{
-					label: 'elevation',
-					data: elev,
-					backgroundColor: [
-						'#daa940'
-						/* 'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.8)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)' */
-					],
-					borderColor: [
-						'rgb(52, 94, 57)'
-						/* 'rgba(255, 99, 132, 1)',
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 206, 86, 1)',
-						'rgba(75, 192, 192, 1)',
-						'rgba(153, 102, 255, 1)',
-						'rgba(255, 159, 64, 1)' */
-					],
-					fill: true,
-					//borderWidth: 1
-					
-				}]
-			},
-			options: {
-				responsive: true,
-				plugins: {
-					legend: {
-						display: false //With this to false doesn't shows the legend
-					}
-				},
-				scales: {
-					y: {
-						beginAtZero: false
-					}
-				}
-			}
-		});
-	}
-	
+	drawRoute();
 }
 
 
