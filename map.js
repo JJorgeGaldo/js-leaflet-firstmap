@@ -58,12 +58,12 @@ function drawElevation(rawData){
 		elev.push(Math.floor(rawData[i][1]));
 	}
 	var gradient = ctx.createLinearGradient(0,150, 0,1000);
-	gradient.addColorStop(.07, 'rgba(244,112,4,.8)');
-	gradient.addColorStop(.3, 'rgba(244,152,4,.8)');
+	gradient.addColorStop(.07, 'rgba(244,80,4,1)');
+	gradient.addColorStop(.3, 'rgba(244,152,4,.9)');
 	gradient.addColorStop(.7, 'rgba(215,169,70,.8)');
 
 	const myChart = new Chart(ctx, {
-		type: 'line',
+		type: 'bar',
 		data: {
 			labels: dist,
 			datasets: [{
@@ -81,15 +81,14 @@ function drawElevation(rawData){
 					'rgba(153, 102, 255, 0.2)',
 					'rgba(255, 159, 64, 0.2)' */
 				],
-				 borderColor: [
-					'rgba(52, 94, 57,0)'
-					/* 'rgba(255, 99, 132, 1)',
+				 /* borderColor: [
+					'rgba(255, 99, 132, 1)',
 					'rgba(54, 162, 235, 1)',
 					'rgba(255, 206, 86, 1)',
 					'rgba(75, 192, 192, 1)',
 					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)' */
-				],
+					'rgba(255, 159, 64, 1)' 
+				], */
 				fill: true,
 				//borderWidth: 1
 				
@@ -100,6 +99,9 @@ function drawElevation(rawData){
 			plugins: {
 				legend: {
 					display: false //With this to false doesn't shows the legend
+				},
+				chartAreaBorder: {
+					borderWidth: 2
 				}
 			},
 			scales: {
@@ -107,7 +109,8 @@ function drawElevation(rawData){
 					beginAtZero: false
 				}
 			}
-		}
+		},
+		
 	});
 }
 
