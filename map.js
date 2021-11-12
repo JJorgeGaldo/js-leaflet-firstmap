@@ -122,6 +122,12 @@ function drawElevation(rawData){
 var mymap = L.map('map').setView([43.01007, -7.55834], 17);
 paintMap();
 
+<<<<<<< Updated upstream
+=======
+L.marker([43.01007, -7.55834]).addTo(mymap)
+	.bindPopup('Horizonte de sucesos')
+    .openPopup();
+>>>>>>> Stashed changes
 L.circle([43.01007, -7.55834], {
 	color: 'red',
 	fillColor: '#f03',
