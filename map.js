@@ -17,6 +17,10 @@ function paintMap(){
 		tileSize: 512,
 		zoomOffset: -1
 	}).addTo(mymap);
+
+	L.marker([43.01007, -7.55834],).addTo(mymap)
+		.bindPopup("<b>Horizonte de sucesos</b>")
+		.openPopup();
 }
 
 function drawRoute(){
@@ -115,12 +119,9 @@ function drawElevation(rawData){
 }
 
 /* Landing map */
-var mymap = L.map('map').setView([43.01007, -7.55834], 15);
+var mymap = L.map('map').setView([43.01007, -7.55834], 17);
 paintMap();
 
-L.marker([43.01007, -7.55834],{
-	title: "Horizonte de sucesos"
-}).addTo(mymap);
 L.circle([43.01007, -7.55834], {
 	color: 'red',
 	fillColor: '#f03',
@@ -130,7 +131,7 @@ L.circle([43.01007, -7.55834], {
 L.polygon([
 	[51.509, -0.08],
 	[50.503, -0.06],
-	[51.51, -0.147]
+	[51.51, -0.057]
 ]).addTo(mymap);
 
 
@@ -148,7 +149,7 @@ showBtn.onclick = (e) =>{
 	e.preventDefault;
 	switch(rutas.value){
 		case '0':
-			paintMap(); 
+			paintMap();
 			console.log(gpx);
 			break;
 		case '1':
