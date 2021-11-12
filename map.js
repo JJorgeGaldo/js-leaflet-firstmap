@@ -58,12 +58,12 @@ function drawElevation(rawData){
 		elev.push(Math.floor(rawData[i][1]));
 	}
 	var gradient = ctx.createLinearGradient(0,150, 0,1000);
-	gradient.addColorStop(.07, 'rgba(244,112,4,1)');
-	gradient.addColorStop(.3, 'rgba(244,152,4,1)');
-	gradient.addColorStop(.7, 'rgba(215,169,70,1)');
+	gradient.addColorStop(.07, 'rgba(244,112,4,.8)');
+	gradient.addColorStop(.3, 'rgba(244,152,4,.8)');
+	gradient.addColorStop(.7, 'rgba(215,169,70,.8)');
 
 	const myChart = new Chart(ctx, {
-		type: 'bar',
+		type: 'line',
 		data: {
 			labels: dist,
 			datasets: [{
@@ -81,8 +81,8 @@ function drawElevation(rawData){
 					'rgba(153, 102, 255, 0.2)',
 					'rgba(255, 159, 64, 0.2)' */
 				],
-				borderColor: [
-					'rgb(52, 94, 57)'
+				 borderColor: [
+					'rgba(52, 94, 57,0)'
 					/* 'rgba(255, 99, 132, 1)',
 					'rgba(54, 162, 235, 1)',
 					'rgba(255, 206, 86, 1)',
