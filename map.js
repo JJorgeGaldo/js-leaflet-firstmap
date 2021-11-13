@@ -13,9 +13,11 @@ function paintMap(){
 		maxZoom: 20,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
 			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
-		id: 'mapbox/outdoors-v11',
+		id: 'mapbox/streets-v11',
 		tileSize: 512,
-		zoomOffset: -1
+		zoomOffset: -1,
+		interactive: true,
+		bubblingMouseEvents: true
 	}).addTo(mymap);
 
 	L.marker([43.01007, -7.55834],).addTo(mymap)
@@ -134,6 +136,12 @@ L.polygon([
 	[51.51, -0.057]
 ]).addTo(mymap);
 
+mymap.on('click', (e) => {
+	console.log(e.latlng);
+	L.marker([e.latlng.lat, e.latlng.lng],).addTo(mymap)
+		.bindPopup("<b>Ojo Perro!!</b>")
+		.openPopup();
+})
 
 
 /* Selecting the Route to show */
