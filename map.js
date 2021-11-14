@@ -4,10 +4,15 @@ const showBtn = document.getElementById('show');
 //const elevation = document.getElementById('elevation');
 const ctx = document.getElementById('elevation').getContext('2d');
 const ctxContainer = document.getElementById('outline');
+let pointsSaved = [];
 
-/* Painting the map */
 
+/* Functions */
 
+function setPointsSaved(x,y){
+	pointsSaved.push(["pxy"+(pointsSaved.length+1),x,y]);
+	console.log(pointsSaved);
+}
 function paintMap(){
 	// The standard OSM map:
 	/* L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -31,9 +36,6 @@ function paintMap(){
 		bubblingMouseEvents: true
 	}).addTo(mymap);
 
-	L.marker([43.01007, -7.55834],).addTo(mymap)
-		.bindPopup("<b>Horizonte de sucesos</b>")
-		.openPopup();
 }
 
 function drawRoute(){
@@ -151,9 +153,13 @@ L.polygon([
 	[50.503, -0.06],
 	[51.51, -0.057]
 ]).addTo(mymap);
+L.marker([43.01007, -7.55834],).addTo(mymap)
+	.bindPopup("<b>Horizonte de sucesos</b>")
+	.openPopup();
 
 mymap.on('click', (e) => {
 	console.log(e.latlng);
+	setPointsSaved(e.latlng.lat, e.latlng.lng);
 	L.marker([e.latlng.lat, e.latlng.lng],).addTo(mymap)
 		.bindPopup(`<b>${popupText()}</b>`)
 		.openPopup();
