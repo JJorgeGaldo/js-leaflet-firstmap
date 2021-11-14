@@ -132,7 +132,7 @@ function drawElevation(rawData){
 }
 
 function popupText(){
-	let text = prompt("Please, Intro the message"):
+	let text = prompt("Please, intro the message to show here");
 	return text;
 }
 
