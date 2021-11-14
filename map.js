@@ -106,7 +106,7 @@ function drawElevation(rawData){
 					'rgba(153, 102, 255, 1)',
 					'rgba(255, 159, 64, 1)' 
 				], */
-				fill: true,
+				fill: true
 				//borderWidth: 1
 				
 			}]
@@ -132,7 +132,7 @@ function drawElevation(rawData){
 }
 
 function popupText(){
-	let text = prompt("Please, intro the message to show here");
+	let text = prompt("Please, intro the message to show here","Watch out");
 	return text;
 }
 
