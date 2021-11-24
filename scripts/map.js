@@ -5,10 +5,9 @@ const showBtn = document.getElementById('show');
 //const elevation = document.getElementById('elevation');
 const ctx = document.getElementById('elevation').getContext('2d');
 const ctxContainer = document.getElementById('outline');
-let pointsSaved = [];
-
-console.log(pointsSaved.length);
-console.log(Object.keys(pointsSaved).length);
+var pointsSaved = [];
+//console.log(pointsSaved.length);
+//console.log(Object.keys(pointsSaved).length);
 
 /* Functions */
 
@@ -17,7 +16,8 @@ const fetchData = async() => {
 	try{
 		const res = await fetch('../dataPoints.json');
 		const data = await res.json();
-		pointsSaved = data;
+		pointsSaved = [...data];
+		//pointsSaved = data;
 		console.log(pointsSaved);
 	}catch(error){
 		console.log(error)
@@ -180,12 +180,6 @@ L.circle([43.01007, -7.55834], {
 	fillOpacity: 0.2,
 	radius: 150
 }).addTo(mymap);
-
-pointsSaved.forEach(element => {
-	console.log(element);
-	L.marker([element.lat, element.lng],element.text).addTo(mymap)
-		.bindPopup(element.text);
-});
 
 pointsSaved.forEach(element => {
 	console.log(element);
