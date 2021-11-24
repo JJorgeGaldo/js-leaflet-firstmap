@@ -1,16 +1,37 @@
+var mymap = L.map('map').setView([43.01007, -7.55834], 17);
 const nomRuta = document.getElementById('nomRuta');
 const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
 //const elevation = document.getElementById('elevation');
 const ctx = document.getElementById('elevation').getContext('2d');
 const ctxContainer = document.getElementById('outline');
-let pointsSaved = [];
-
+let pointsSaved = [
+	{
+		id: "pxy1",
+		lat:43.011441026962196,
+		lng: -7.555643320083619,
+		text: 'Hola desde el objeto'
+	}
+];
+console.log(pointsSaved.length);
+console.log(Object.keys(pointsSaved).length)
 
 /* Functions */
 
-function setPointsSaved(x,y){
-	pointsSaved.push(["pxy"+(pointsSaved.length+1),x,y]);
+// First we check if there are data saved at the LocalStorage
+const getData = () => {
+
+}
+
+const setPointsSaved = (x,y,t) => {
+	const point = {
+		id: ("pxy"+(pointsSaved.length+1)),
+		lat: x,
+		lng: y,
+		text: t
+	}
+
+	pointsSaved.push(point);
 	console.log(pointsSaved);
 }
 function paintMap(){
@@ -63,7 +84,6 @@ function drawRoute(){
 		
 	}).addTo(mymap);
 }
-
 
 function drawElevation(rawData){
 	let chartStatus = Chart.getChart('elevation');
@@ -138,8 +158,8 @@ function popupText(){
 	return text;
 }
 
-/* Landing map */
-var mymap = L.map('map').setView([43.01007, -7.55834], 17);
+/* Landing page map */
+
 paintMap();
 
 L.circle([43.01007, -7.55834], {
@@ -159,9 +179,10 @@ L.marker([43.01007, -7.55834],).addTo(mymap)
 
 mymap.on('click', (e) => {
 	console.log(e.latlng);
-	setPointsSaved(e.latlng.lat, e.latlng.lng);
+	const textOfPoint = popupText();
+	setPointsSaved(e.latlng.lat, e.latlng.lng, textOfPoint);
 	L.marker([e.latlng.lat, e.latlng.lng],).addTo(mymap)
-		.bindPopup(`<b>${popupText()}</b>`)
+		.bindPopup(`<b>${textOfPoint}</b>`)
 		.openPopup();
 })
 
