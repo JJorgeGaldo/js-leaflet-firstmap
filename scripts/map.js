@@ -5,25 +5,33 @@ const showBtn = document.getElementById('show');
 //const elevation = document.getElementById('elevation');
 const ctx = document.getElementById('elevation').getContext('2d');
 const ctxContainer = document.getElementById('outline');
-let pointsSaved = [
-	{
-		id: "pxy1",
-		lat:43.011441026962196,
-		lng: -7.555643320083619,
-		text: 'Hola desde el objeto'
-	}
-];
+let pointsSaved = [];
+
 console.log(pointsSaved.length);
-console.log(Object.keys(pointsSaved).length)
+console.log(Object.keys(pointsSaved).length);
 
 /* Functions */
 
 // First we check if there are data saved at the LocalStorage
-const getData = () => {
-
+const fetchData = async() => {
+	try{
+		const res = await fetch('../dataPoints.json');
+		const data = await res.json();
+		pointsSaved = data;
+		console.log(pointsSaved);
+	}catch(error){
+		console.log(error)
+	}
 }
 
-const setPointsSaved = (x,y,t) => {
+const getData = () => {
+	fetchData();
+	if  (localStorage.getItem("savedPoints")) {
+        pointsSaved = JSON.parse(localStorage.getItem("savedPoints"))
+    }
+}
+
+const setPoint = (x,y,t) => {
 	const point = {
 		id: ("pxy"+(pointsSaved.length+1)),
 		lat: x,
@@ -34,7 +42,7 @@ const setPointsSaved = (x,y,t) => {
 	pointsSaved.push(point);
 	console.log(pointsSaved);
 }
-function paintMap(){
+const paintMap = () => {
 	// The standard OSM map:
 	/* L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		maxZoom: 20,
@@ -59,7 +67,7 @@ function paintMap(){
 
 }
 
-function drawRoute(){
+const drawRoute = () => {
 	
 	let route = new L.GPX(gpx, {
 		async: true,
@@ -85,7 +93,7 @@ function drawRoute(){
 	}).addTo(mymap);
 }
 
-function drawElevation(rawData){
+const drawElevation = (rawData) => {
 	let chartStatus = Chart.getChart('elevation');
 	if (chartStatus != undefined) {
 		chartStatus.destroy();
@@ -153,13 +161,17 @@ function drawElevation(rawData){
 	});
 }
 
-function popupText(){
-	let text = prompt("Please, intro the message to show here","Watch out");
+const popupText = () => {
+	let text = prompt("Please, intro the message to show here","Hello fromn here!");
 	return text;
 }
 
-/* Landing page map */
 
+/* Landing page map */
+getData();
+console.log(Object.keys(pointsSaved).length);
+console.log(pointsSaved.length);
+console.log(pointsSaved);
 paintMap();
 
 L.circle([43.01007, -7.55834], {
@@ -168,22 +180,26 @@ L.circle([43.01007, -7.55834], {
 	fillOpacity: 0.2,
 	radius: 150
 }).addTo(mymap);
-L.polygon([
-	[51.509, -0.08],
-	[50.503, -0.06],
-	[51.51, -0.057]
-]).addTo(mymap);
-L.marker([43.01007, -7.55834],).addTo(mymap)
-	.bindPopup("<b>Horizonte de sucesos</b>")
-	.openPopup();
+
+pointsSaved.forEach(element => {
+	console.log(element);
+	L.marker([element.lat, element.lng],element.text).addTo(mymap)
+		.bindPopup(element.text);
+});
+
+pointsSaved.forEach(element => {
+	console.log(element);
+	L.marker([element.lat, element.lng],element.text).addTo(mymap)
+		.bindPopup(element.text);
+});
 
 mymap.on('click', (e) => {
 	console.log(e.latlng);
 	const textOfPoint = popupText();
-	setPointsSaved(e.latlng.lat, e.latlng.lng, textOfPoint);
+	setPoint(e.latlng.lat, e.latlng.lng, textOfPoint);
 	L.marker([e.latlng.lat, e.latlng.lng],).addTo(mymap)
-		.bindPopup(`<b>${textOfPoint}</b>`)
-		.openPopup();
+		.bindPopup(`<b>${textOfPoint}</b>`);
+		//.openPopup();
 })
 
 

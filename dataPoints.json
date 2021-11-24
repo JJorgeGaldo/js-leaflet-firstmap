@@ -1,1 +1,14 @@
-[]
+[
+	{
+		"id": "pxy1",
+		"lat":43.011441026962196,
+		"lng": -7.555643320083619,
+		"text": "Hola desde el objeto"
+	},
+	{
+		"id": "pxy2",
+		"lat":43.01007,
+		"lng": -7.55834,
+		"text": "<b>Horizonte de sucesos</b>"
+	}
+]
