@@ -2,12 +2,9 @@ var mymap = L.map('map').setView([43.01007, -7.55834], 17);
 const nomRuta = document.getElementById('nomRuta');
 const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
-//const elevation = document.getElementById('elevation');
-const ctx = document.getElementById('elevation').getContext('2d');
-const ctxContainer = document.getElementById('outline');
+const elevation = document.getElementById('elevation').getContext('2d');
+const elevationContainer = document.getElementById('outline');
 var pointsSaved = [];
-//console.log(pointsSaved.length);
-//console.log(Object.keys(pointsSaved).length);
 
 /* Functions */
 
@@ -16,9 +13,9 @@ const fetchData = async() => {
 	try{
 		const res = await fetch('../dataPoints.json');
 		const data = await res.json();
-		pointsSaved = [...data];
-		//pointsSaved = data;
-		console.log(pointsSaved);
+		data.forEach(element => {
+			pointsSaved.push(element);
+		});
 	}catch(error){
 		console.log(error)
 	}
@@ -84,10 +81,10 @@ const drawRoute = () => {
 		nomRuta.textContent=e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
 		
 		if(Math.floor(e.target._info.elevation.gain)){
-			ctxContainer.style.display = "block";
+			elevationContainer.style.display = "block";
 			drawElevation(e.target._info.elevation._points);
 		}else{
-			ctxContainer.style.display = "none";
+			elevationContainer.style.display = "none";
 		}
 		
 	}).addTo(mymap);
@@ -104,12 +101,12 @@ const drawElevation = (rawData) => {
 		dist.push(((rawData[i][0])/1000).toFixed(2));
 		elev.push(Math.floor(rawData[i][1]));
 	}
-	var gradient = ctx.createLinearGradient(0,150, 0,1000);
+	var gradient = elevation.createLinearGradient(0,150, 0,1000);
 	gradient.addColorStop(.07, 'rgba(244,80,4,1)');
 	gradient.addColorStop(.3, 'rgba(244,152,4,.9)');
 	gradient.addColorStop(.7, 'rgba(215,169,70,.8)');
 
-	const myChart = new Chart(ctx, {
+	const myChart = new Chart(elevation, {
 		type: 'bar',
 		data: {
 			labels: dist,
@@ -169,10 +166,15 @@ const popupText = () => {
 
 /* Landing page map */
 getData();
-console.log(Object.keys(pointsSaved).length);
-console.log(pointsSaved.length);
+//console.log(Object.values(pointsSaved));
 console.log(pointsSaved);
 paintMap();
+
+pointsSaved.forEach(point = () => {
+	console.log(point);
+	/* L.marker([point.lat, point.lng],point.text).addTo(mymap)
+	.bindPopup(point.text); */
+})
 
 L.circle([43.01007, -7.55834], {
 	color: 'red',
@@ -180,12 +182,11 @@ L.circle([43.01007, -7.55834], {
 	fillOpacity: 0.2,
 	radius: 150
 }).addTo(mymap);
+console.log("HOLA");
 
-pointsSaved.forEach(element => {
-	console.log(element);
-	L.marker([element.lat, element.lng],element.text).addTo(mymap)
-		.bindPopup(element.text);
-});
+
+
+console.log("HOLA2");
 
 mymap.on('click', (e) => {
 	console.log(e.latlng);
@@ -195,6 +196,7 @@ mymap.on('click', (e) => {
 		.bindPopup(`<b>${textOfPoint}</b>`);
 		//.openPopup();
 })
+console.log("HOLA3");
 
 
 /* Selecting the Route to show */
