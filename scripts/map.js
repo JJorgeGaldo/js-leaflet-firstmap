@@ -18,16 +18,16 @@ const fetchData = async() => {
 		});
     }else{
 		try{
-		const res = await fetch('../dataPoints.json');
-		//console.log(res);
-		const pointsSaved = await res.json();
-		pointsSaved.forEach(element => {
-			//console.log(element);
-			setPoint(element.lat, element.lng, element.text);
-		});
-	}catch(error){
-		console.log(error);
-	}
+			const res = await fetch('../dataPoints.json');
+			//console.log(res);
+			const pointsSaved = await res.json();
+			pointsSaved.forEach(element => {
+				//console.log(element);
+				setPoint(element.lat, element.lng, element.text);
+			});
+		}catch(error){
+			console.log(error);
+		}
 	}
 	
 }
