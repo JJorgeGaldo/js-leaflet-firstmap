@@ -4,29 +4,33 @@ const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
 const elevation = document.getElementById('elevation').getContext('2d');
 const elevationContainer = document.getElementById('outline');
-var pointsSaved = [];
+let pointsSaved = [];
 
 /* Functions */
 
-// First we check if there are data saved at the LocalStorage
+// We check the local storage to look for data, and if there´s no data, we take the data from the .json and save it to a variable
 const fetchData = async() => {
-	try{
+	if  (localStorage.getItem("localStoragedPoints")) {
+        pointsSaved = JSON.parse(localStorage.getItem("localStoragedPoints"));
+        pointsSaved.forEach(element => {
+			//console.log(element);
+			paintPoint(element);
+		});
+    }else{
+		try{
 		const res = await fetch('../dataPoints.json');
-		const data = await res.json();
-		data.forEach(element => {
-			pointsSaved.push(element);
-			console.log(pointsSaved);
+		//console.log(res);
+		const pointsSaved = await res.json();
+		//console.log(pointsSaved);
+		pointsSaved.forEach(element => {
+			//console.log(element);
+			setPoint(element.lat, element.lng, element.text);
 		});
 	}catch(error){
-		console.log(error)
+		console.log(error);
 	}
-}
-
-const getData = () => {
-	fetchData();
-	if  (localStorage.getItem("savedPoints")) {
-        pointsSaved = JSON.parse(localStorage.getItem("savedPoints"))
-    }
+	}
+	
 }
 
 const setPoint = (x,y,t) => {
@@ -38,7 +42,15 @@ const setPoint = (x,y,t) => {
 	}
 
 	pointsSaved.push(point);
-	console.log(pointsSaved);
+	localStorage.setItem("localStoragedPoints", JSON.stringify(pointsSaved));
+	paintPoint(point);
+	console.log(pointsSaved.length);
+
+}
+const paintPoint = (obj) => {
+	L.marker([obj.lat, obj.lng],).addTo(mymap)
+		.bindPopup(`<b>${obj.text}</b>`);
+	//.openPopup();
 }
 const paintMap = () => {
 	// The standard OSM map:
@@ -160,24 +172,26 @@ const drawElevation = (rawData) => {
 }
 
 const popupText = () => {
-	let text = prompt("Please, intro the message to show here","Hello fromn here!");
+	let text = prompt("Please, intro the message to show here","Hello from here!");
 	return text;
 }
 
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
 
 /* Landing page map */
-getData();
-console.log(Object.keys(pointsSaved).length)
-console.log(pointsSaved);
-paintMap();
-let array = [{index: 1,value: 34},2,[4,3,2,1],5,,3423,23,3];
-console.log(array)
 
-pointsSaved.forEach(point = () => {
-	console.log(point);
-	/* L.marker([point.lat, point.lng],point.text).addTo(mymap)
-	.bindPopup(point.text); */
+document.addEventListener("DOMContentLoaded", () =>{
+	fetchData();
+	paintMap();
 })
+
+/* let array = [{'index': 1,'value': 34},{a:2},{m:3,n:1}];
+console.log(array);
+array.push({r:43,sdf:55});
+console.log(array);
+console.log(array.length); */
 
 L.circle([43.01007, -7.55834], {
 	color: 'red',
@@ -185,22 +199,14 @@ L.circle([43.01007, -7.55834], {
 	fillOpacity: 0.2,
 	radius: 150
 }).addTo(mymap);
-console.log("HOLA");
-
-
-
-console.log("HOLA2");
 
 mymap.on('click', (e) => {
 	console.log(e.latlng);
-	const textOfPoint = popupText();
-	setPoint(e.latlng.lat, e.latlng.lng, textOfPoint);
-	L.marker([e.latlng.lat, e.latlng.lng],).addTo(mymap)
-		.bindPopup(`<b>${textOfPoint}</b>`);
-		//.openPopup();
+	let textOfPoint = popupText();
+	if(textOfPoint){
+		setPoint(e.latlng.lat, e.latlng.lng, textOfPoint);
+	}
 })
-console.log("HOLA3");
-
 
 /* Selecting the Route to show */
 showBtn.onclick = (e) =>{
@@ -252,9 +258,7 @@ showBtn.onclick = (e) =>{
 
 
 
-
-
-/* Different views from https://docs.mapbox.com/api/maps/styles/
+/* Different map views from https://docs.mapbox.com/api/maps/styles/
 mapbox://styles/mapbox/outdoors-v11
 mapbox://styles/mapbox/streets-v11
 mapbox://styles/mapbox/light-v10
