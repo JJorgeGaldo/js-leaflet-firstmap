@@ -21,7 +21,6 @@ const fetchData = async() => {
 		const res = await fetch('../dataPoints.json');
 		//console.log(res);
 		const pointsSaved = await res.json();
-		//console.log(pointsSaved);
 		pointsSaved.forEach(element => {
 			//console.log(element);
 			setPoint(element.lat, element.lng, element.text);
