@@ -15,6 +15,7 @@ const fetchData = async() => {
 		const data = await res.json();
 		data.forEach(element => {
 			pointsSaved.push(element);
+			console.log(pointsSaved);
 		});
 	}catch(error){
 		console.log(error)
@@ -166,9 +167,11 @@ const popupText = () => {
 
 /* Landing page map */
 getData();
-//console.log(Object.values(pointsSaved));
+console.log(Object.keys(pointsSaved).length)
 console.log(pointsSaved);
 paintMap();
+let array = [{index: 1,value: 34},2,[4,3,2,1],5,,3423,23,3];
+console.log(array)
 
 pointsSaved.forEach(point = () => {
 	console.log(point);
