@@ -1,10 +1,80 @@
-var mymap = L.map('map').setView([43.01007, -7.55834], 17);
+
 const nomRuta = document.getElementById('nomRuta');
 const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
 const elevation = document.getElementById('elevation').getContext('2d');
 const elevationContainer = document.getElementById('outline');
 let pointsSaved = [];
+
+
+/* Creating the different map layers: */
+let 
+	outdoors = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 20,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
+		id: 'mapbox/outdoors-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		interactive: true,
+		bubblingMouseEvents: true
+	}),
+	streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 20,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
+		id: 'mapbox/outdoors-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		interactive: true,
+		bubblingMouseEvents: true
+	}),
+	dark = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 20,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
+		id: 'mapbox/dark-v10',
+		tileSize: 512,
+		zoomOffset: -1,
+		interactive: true,
+		bubblingMouseEvents: true
+	}),
+	satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 20,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
+		id: 'mapbox/satellite-streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		interactive: true,
+		bubblingMouseEvents: true
+	}),
+	navigationDay = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 20,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/" class="attribution">Mapbox </a>',
+		id: 'mapbox/navigation-day-v1',
+		tileSize: 512,
+		zoomOffset: -1,
+		interactive: true,
+		bubblingMouseEvents: true
+	});
+// Initializing the map:
+var mymap = L.map('map').setView([43.01007, -7.55834], 17, [outdoors,streets,dark,satelliteStreets,navigationDay]);
+
+//Creating the map layer selector:
+var baseMaps = {
+    "Outdoor": outdoors,
+    "Streets": streets,
+    "Dark Mode": dark,
+    "Satellite": satelliteStreets,
+    "Navigation": navigationDay,
+};
+
+//! Creating the Point layer selector: (NOT WORKING)
+var overlayMapPoints = {
+    "POI": pointsSaved
+};
 
 /* Functions */
 
@@ -73,6 +143,8 @@ const paintMap = () => {
 		interactive: true,
 		bubblingMouseEvents: true
 	}).addTo(mymap);
+
+	L.control.layers(baseMaps).addTo(mymap);
 
 }
 
