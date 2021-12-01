@@ -104,3 +104,32 @@ body{
 		background: radial-gradient(90px circle at top center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
 	}
 }
+
+/* Curves Design */
+.custom-shape-divider-top-1638356510 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1638356510 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 73px;
+}
+
+.custom-shape-divider-top-1638356510 .shape-fill {
+    fill: #ddcaad;
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+    .custom-shape-divider-top-1638356510 svg {
+        width: calc(100% + 1.3px);
+        height: 147px;
+    }
+}
