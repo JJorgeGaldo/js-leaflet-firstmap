@@ -4,7 +4,7 @@ body{
     width: 100%;
 }
 header{
-    background-image: url('../images/header-layered-waves6-haikei.svg');
+    background-image: url('../images/header-layered-waves3-haikei.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -141,7 +141,7 @@ header{
         height: 47px;
     } */
     header{
-        background-image: url('../images/header-mobile-devices-layered-waves2-haikei.svg');
+        background-image: url('../images/header-mobile-devices-layered-waves5-haikei.svg');
         background-size: cover;
     }
 }
