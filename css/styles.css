@@ -6,14 +6,26 @@ body{
 }
 header{
     margin: 0;
-    background-image: url('../images/header-layered-waves4-haikei.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    position: relative;
 }
 .burger{
     display: none;
 }
+.background::before{
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .7;
+    background-image: url('../images/header-layered-waves4-haikei.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #cabecera{
+    position: relative;
     font-family: 'Courier New', Courier, monospace;
     color: #daa940;
     margin: 0;
@@ -80,7 +92,7 @@ header{
 	border-radius: 50px;
     padding: 2vh;
     color: white;
-    background: #daa940;
+    /* background: #daa940; */
     background: #b84348;
     transition: all 0.1s ease-out 0s;
 }
