@@ -5,17 +5,24 @@ body{
     width: 100%;
 }
 header{
+    margin: 0;
     background-image: url('../images/header-layered-waves4-haikei.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }
+.burger{
+    display: none;
+}
 #cabecera{
     font-family: 'Courier New', Courier, monospace;
     color: #daa940;
+    margin: 0;
+    padding: 1em 0;
+    text-align: center;    
+}
+.textCabecera{
     color: #B84348;
-    text-align: center;
-    
-    
+    color: aliceblue;
 }
 /* #show{
     background-color: ;
@@ -27,6 +34,7 @@ header{
 
 } */
 #nomRuta{
+    margin: 0;
     text-align: center;
     color: #daa940;
 }
@@ -48,6 +56,8 @@ header{
     background-color: white;
     margin-top: 2vh;
 }
+
+/*! Show button */
 .button {
 	display: block;
     width: 220px;
@@ -71,6 +81,7 @@ header{
     padding: 2vh;
     color: white;
     background: #daa940;
+    background: #b84348;
     transition: all 0.1s ease-out 0s;
 }
 
@@ -114,7 +125,7 @@ header{
 	}
 }
 
-/** Curves Design **/
+/*! Curves Design **/
 /* .custom-shape-divider-top-1638356510 {
     position: absolute;
     top: 0;
