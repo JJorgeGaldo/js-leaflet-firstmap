@@ -1,12 +1,20 @@
 body{
-    background-color: rgb(128, 128, 100);
+    background-color: #6A804D;
     margin: 0;
     width: 100%;
+}
+header{
+    background-image: url('../images/header-layered-waves3-haikei.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #cabecera{
     font-family: 'Courier New', Courier, monospace;
     color: #daa940;
+    color: #B84348;
     text-align: center;
+    
+    
 }
 /* #show{
     background-color: ;
@@ -106,7 +114,7 @@ body{
 }
 
 /* Curves Design */
-.custom-shape-divider-top-1638356510 {
+/* .custom-shape-divider-top-1638356510 {
     position: absolute;
     top: 0;
     left: 0;
@@ -123,13 +131,13 @@ body{
 }
 
 .custom-shape-divider-top-1638356510 .shape-fill {
-    fill: #ddcaad;
-}
+    fill: #78dd9f;
+} */
 
 /** For mobile devices **/
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
     .custom-shape-divider-top-1638356510 svg {
         width: calc(100% + 1.3px);
         height: 47px;
     }
-}
+} */
