@@ -113,7 +113,7 @@ header{
 	}
 }
 
-/* Curves Design */
+/** Curves Design **/
 /* .custom-shape-divider-top-1638356510 {
     position: absolute;
     top: 0;
@@ -134,10 +134,14 @@ header{
     fill: #78dd9f;
 } */
 
-/** For mobile devices **/
-/* @media (max-width: 767px) {
-    .custom-shape-divider-top-1638356510 svg {
+/**! For mobile devices **/
+@media (max-width: 767px) {
+    /* .custom-shape-divider-top-1638356510 svg {
         width: calc(100% + 1.3px);
         height: 47px;
+    } */
+    header{
+        background-image: url('../images/header-mobile-devices-layered-waves-haikei.svg');
+        background-size: cover;
     }
-} */
+}
