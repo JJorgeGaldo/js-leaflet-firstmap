@@ -1,10 +1,11 @@
 body{
     background-color: #038373;
+    background-color: #daa940;
     margin: 0;
     width: 100%;
 }
 header{
-    background-image: url('../images/header-layered-waves3-haikei.svg');
+    background-image: url('../images/header-layered-waves4-haikei.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -141,7 +142,7 @@ header{
         height: 47px;
     } */
     header{
-        background-image: url('../images/header-mobile-devices-layered-waves5-haikei.svg');
+        background-image: url('../images/header-mobile-devices-layered-waves3-haikei.svg');
         background-size: cover;
     }
 }
