@@ -4,10 +4,14 @@ const rutas = document.getElementById('rutas');
 const showBtn = document.getElementById('show');
 const elevation = document.getElementById('elevation').getContext('2d');
 const elevationContainer = document.getElementById('outline');
+const forecast = document.getElementById('forecast').getContext('2d');
+const forecastContainer = document.getElementById('forecastOutline');
 let pointsSaved = [];
+const showForecast = document.getElementById('weather');
 
 
-/* Creating the different map layers: */
+
+//! Creating the different map layers: */
 let 
 	outdoors = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 20,
@@ -59,10 +63,10 @@ let
 		interactive: true,
 		bubblingMouseEvents: true
 	});
-// Initializing the map:
+//! Initializing the map:
 var mymap = L.map('map').setView([43.01007, -7.55834], 17, [outdoors,streets,dark,satelliteStreets,navigationDay]);
 
-//Creating the map layer selector:
+//!Creating the map layer selector:
 var baseMaps = {
     "Outdoor": outdoors,
     "Streets": streets,
@@ -71,12 +75,12 @@ var baseMaps = {
     "Navigation": navigationDay,
 };
 
-//! Creating the Point layer selector: (NOT WORKING)
+//! Creating the Point layer selector: (NOT WORKING)*/
 var overlayMapPoints = {
     "POI": pointsSaved
 };
 
-/* Functions */
+//! Functions */
 
 // We check the local storage to look for data, and if there´s no data, we take the data from the .json and save it to a variable
 const fetchData = async() => {
@@ -174,6 +178,7 @@ const drawRoute = () => {
 	}).addTo(mymap);
 }
 
+//! Elevation Chart
 const drawElevation = (rawData) => {
 	let chartStatus = Chart.getChart('elevation');
 	if (chartStatus != undefined) {
@@ -247,6 +252,23 @@ const popupText = () => {
 	return text;
 }
 
+//! Forecast Chart
+showForecast.addEventListener('click', (e) =>{
+	e.preventDefault();
+	console.log(e.target)
+	console.log(forecastContainer.classList.contains("hidden"));
+	console.log(forecastContainer.classList[1]);
+	if(e.target.classList.contains("hidden")){
+		forecastContainer.style.display = "block";
+		forecastContainer.classList.remove('hidden');
+		//getClimate();
+	}else{
+		forecastContainer.style.display = "none";
+		forecastContainer.classList.add('hidden');
+	}
+	e.stopPropagation();
+})
+
 /***********************************************************************************/
 /***********************************************************************************/
 /***********************************************************************************/
@@ -312,7 +334,7 @@ showBtn.onclick = (e) =>{
 			rutas.value = 0;
 			break;
 		case '5':
-			gpx = './tracks/LUGO_ALMERIA.gpx';
+			gpx = './tracks/RIBADEO-SanCibrao.gpx';
 			rutas.value = 0;
 			break;
 		case '6':
@@ -323,10 +345,101 @@ showBtn.onclick = (e) =>{
 	drawRoute();
 }
 
+//! Minute weather widget */
+const weatherKey = "vVUOw5LAAnBGLhRmWvz2FRyHX0zFuxPk";
+const loc = "43.01007, -7.55834";
+const targetUrl = 'http://dataservice.accuweather.com/forecasts/v1/minute?q=43.01007%2C%20-7.55834&apikey=vVUOw5LAAnBGLhRmWvz2FRyHX0zFuxPk';
+let arrayForecast = [];
+let ChartLabel = [];
 
+const getClimate = async () => {
+	const res = await fetch('http://dataservice.accuweather.com/forecasts/v1/minute?q='+loc+'&apikey='+weatherKey+'');
+	const data = await res.json();
+	console.log(data);
+	forecast.textContent = data.Link;
+	drawForecast(data);
+}
+const drawForecast = (rawData) => {
+	let chartStatus = Chart.getChart('forecast');
+	if (chartStatus != undefined) {
+		chartStatus.destroy();
+	}
 
+	// Array that check the object and extract the minute-by-minute info
+	console.log(rawData.Summaries[1].StartMinute);
+	console.log(rawData.Summaries[1].EndMinute);
+	console.log(rawData.Summaries[1].CountMinute);
+	console.log(rawData.Summaries[1].TypeId);
+	console.log(rawData.Summaries[1].Type);
+	for(let i = 0; i < rawData.Summaries.length; i++){
+		if(rawData.Summaries[i].TypeId == 1){
+			for(let j = rawData.Summaries[i].StartMinute; j <= rawData.Summaries[i].EndMinute; j++){
+				arrayForecast.push(1);
+				ChartLabel.push(j);
+				console.log("Llueve en minuto: ");
+				console.log(arrayForecast.length);
+			}
+		}else{
+			for(let j = rawData.Summaries[i].StartMinute; j <= rawData.Summaries[i].EndMinute; j++){
+				arrayForecast.push(0);
+				ChartLabel.push(j);
+				console.log("No llueve en minuto: ");
+				console.log(arrayForecast.length);
+			}
+		}
+	}
 
-
+	const myChart = new Chart(forecast, {
+		type: 'bar',
+		data: {
+			labels: ChartLabel,
+			datasets: [{
+				label: 'forecast',
+				data: arrayForecast,
+				backgroundColor: [
+					'#B84348'
+					/* '#daa940' */
+					/* background: rgb(244,112,4);
+					background: linear-gradient(180deg, rgba(244,112,4,1) 7%, rgba(244,152,4,1) 30%, rgba(215,169,70,1) 70%); */
+					/* 'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.8)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)' */
+				],
+				 /* borderColor: [
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)' 
+				], */
+				fill: true
+				//borderWidth: 1
+				
+			}]
+		},
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					display: false //With this to false doesn't shows the legend
+				},
+				chartAreaBorder: {
+					borderWidth: 2
+				}
+			},
+			scales: {
+				y: {
+					beginAtZero: true
+				}
+			}
+		},
+		
+	});
+}
 
 
 /* Different map views from https://docs.mapbox.com/api/maps/styles/

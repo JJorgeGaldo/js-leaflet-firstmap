@@ -1,6 +1,9 @@
 body{
     background-color: #038373;
     background-color: #daa940;
+    background-image: url('../images/bg2-layered-waves-haikei.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0;
     width: 100%;
 }
@@ -11,7 +14,7 @@ header{
 .burger{
     display: none;
 }
-.background::before{
+/* .background::before{
     content: ' ';
     position: absolute;
     left: 0;
@@ -31,7 +34,7 @@ header{
     margin: 0;
     padding: 1em 0;
     text-align: center;    
-}
+} */
 .textCabecera{
     color: #B84348;
     color: aliceblue;
@@ -158,14 +161,25 @@ header{
     fill: #78dd9f;
 } */
 
-/**! For mobile devices **/
+
+/*! Forecast div */
+.forecastContainer{
+    height: 2.5em;
+    width: 100%;
+    background-color: #B84348;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    display: none;
+}
+
+
+
+/**! MEDIAQUERIES **/
 @media (max-width: 767px) {
     /* .custom-shape-divider-top-1638356510 svg {
         width: calc(100% + 1.3px);
         height: 47px;
     } */
-    header{
-        background-image: url('../images/header-mobile-devices-layered-waves3-haikei.svg');
-        background-size: cover;
-    }
+    
 }
