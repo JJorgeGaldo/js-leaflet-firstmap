@@ -261,7 +261,7 @@ showForecast.addEventListener('click', (e) =>{
 	if(forecastContainer.classList.contains("hidden")){
 		forecastContainer.style.display = "block";
 		forecastContainer.classList.remove('hidden');
-		//getClimate();
+		getClimate();
 	}else{
 		forecastContainer.style.display = "none";
 		forecastContainer.classList.add('hidden');
@@ -422,6 +422,7 @@ const drawForecast = (rawData) => {
 			}]
 		},
 		options: {
+			maintainAspectRatio: false,
 			responsive: true,
 			plugins: {
 				legend: {

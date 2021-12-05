@@ -1,6 +1,6 @@
 body{
-    background-color: #038373;
-    background-color: #daa940;
+    /* background-color: #038373;
+    background-color: #daa940; */
     background-image: url('../images/bg2-layered-waves-haikei.svg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,15 +26,15 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+*/
 #cabecera{
-    position: relative;
+    /* position: relative;
     font-family: 'Courier New', Courier, monospace;
-    color: #daa940;
+    color: #daa940; */
     margin: 0;
     padding: 1em 0;
     text-align: center;    
-} */
+}
 .textCabecera{
     color: #B84348;
     color: aliceblue;
@@ -96,7 +96,7 @@ header{
     padding: 2vh;
     color: white;
     /* background: #daa940; */
-    background: #b84348;
+    background: #daa940;
     transition: all 0.1s ease-out 0s;
 }
 
@@ -164,15 +164,22 @@ header{
 
 /*! Forecast div */
 .forecastContainer{
-    height: 2.5em;
-    width: 100%;
-    background-color: #B84348;
+    /* height: 2.5em;
+    width: 100%; */
+    background-color: white;
     z-index: 10;
-    text-align: center;
-    color: white;
+    /* text-align: center;
+    color: white; */
     display: none;
 }
-
+#forecast{
+    height: 150px;
+}
+#weather{
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+}
 
 
 /**! MEDIAQUERIES **/
@@ -181,5 +188,14 @@ header{
         width: calc(100% + 1.3px);
         height: 47px;
     } */
-    
+    body{
+        background-image: none;
+    }
+    .imgBack{
+        margin: 0;
+        background-image: url('../images/header-mobile-devices-layered-waves4-haikei.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+    }
 }
