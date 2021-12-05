@@ -258,7 +258,7 @@ showForecast.addEventListener('click', (e) =>{
 	console.log(e.target)
 	console.log(forecastContainer.classList.contains("hidden"));
 	console.log(forecastContainer.classList[1]);
-	if(e.target.classList.contains("hidden")){
+	if(forecastContainer.classList.contains("hidden")){
 		forecastContainer.style.display = "block";
 		forecastContainer.classList.remove('hidden');
 		//getClimate();
