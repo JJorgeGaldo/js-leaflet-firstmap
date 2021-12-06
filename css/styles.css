@@ -6,34 +6,94 @@ body{
     background-size: cover;
     margin: 0;
     width: 100%;
+    height: 100vh;
 }
 header{
     margin: 0;
     position: relative;
+    overflow: visible;
 }
-.burger{
-    display: none;
-}
-/* .background::before{
-    content: ' ';
-    position: absolute;
-    left: 0;
-    top: 0;
+
+/*! Route menu */
+/* First we set the buttons within the map area */
+.map-wrapper {
     width: 100%;
     height: 100%;
-    opacity: .7;
-    background-image: url('../images/header-layered-waves4-haikei.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    position: relative;
 }
-*/
+.button-wrapper {
+    position: absolute;
+    bottom: 40px;
+    left: 30px;
+    width: 12%;
+    z-index: 1000;
+    padding: .5em;
+    background-color: rgba(12,12,12,.2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.burger{
+    font-weight: bold;
+    color: #B84348;
+    font-size: 1.5em;
+}
+#weatherIcon{
+    font-weight: bold;
+    color: #B84348;
+    font-size: 1.5em;
+}
+.routes {
+    position: relative;
+    height: 100%; /* 100% Full-height */
+    width: 150px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Stay on top */
+    top: 0;
+    left: -150px;
+    background-color: rgba(17, 17, 17,.5); /* Black*/
+    color: white;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 1em; /* Place content 60px from the top */
+    transition: .5s; /* 0.5 second transition effect to slide in the sidenav */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+}#routeX{
+    height: 16.67%;
+    display: flex;
+    align-items: center;
+}
+#routeX:hover{
+    background-color: rgba(17, 17, 17,.7);
+}
+.routes li{
+    list-style-type: none;
+}
+
+.fa-times{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: .2em;
+    align-items: center;
+}
+
+/*! Weather widget */
+#weatherIcon{
+    font-weight: bold;
+    color: #B84348;
+}
 #cabecera{
     /* position: relative;
     font-family: 'Courier New', Courier, monospace;
     color: #daa940; */
     margin: 0;
     padding: 1em 0;
-    text-align: center;    
+    text-align: center;
+    overflow: visible;  
 }
 .textCabecera{
     color: #B84348;
@@ -49,16 +109,19 @@ header{
 
 } */
 #nomRuta{
+    display: none;
     margin: 0;
     text-align: center;
     color: #daa940;
 }
 #map{
     box-sizing: border-box;
-    height: 75vh;
-    width: 100%;
-    /* margin: 0 auto; */
+    height: 95%;
+    width: 95%;
+    margin: 1em auto;
     padding: 6em;
+    border-radius: 5px;
+    overflow: hidden;
 }
 #attribution{
     margin-right: 3em;
@@ -184,18 +247,14 @@ header{
 
 /**! MEDIAQUERIES **/
 @media (max-width: 767px) {
-    /* .custom-shape-divider-top-1638356510 svg {
-        width: calc(100% + 1.3px);
-        height: 47px;
-    } */
     body{
         background-image: none;
     }
-    .imgBack{
-        margin: 0;
-        background-image: url('../images/header-mobile-devices-layered-waves4-haikei.svg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: top;
+    #map{
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+        padding: 6em;
+        overflow: hidden;
     }
 }

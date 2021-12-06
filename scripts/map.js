@@ -6,9 +6,11 @@ const elevation = document.getElementById('elevation').getContext('2d');
 const elevationContainer = document.getElementById('outline');
 const forecast = document.getElementById('forecast').getContext('2d');
 const forecastContainer = document.getElementById('forecastOutline');
+const showForecast = document.getElementById('weatherIcon');
+const routeIcon = document.querySelector(".burger");
+const routeMenu = document.querySelector(".routes");
+const closeMenu = document.querySelector(".fa-times");
 let pointsSaved = [];
-const showForecast = document.getElementById('weather');
-
 
 
 //! Creating the different map layers: */
@@ -261,12 +263,21 @@ showForecast.addEventListener('click', (e) =>{
 	if(forecastContainer.classList.contains("hidden")){
 		forecastContainer.style.display = "block";
 		forecastContainer.classList.remove('hidden');
-		getClimate();
+		//getClimate();
 	}else{
 		forecastContainer.style.display = "none";
 		forecastContainer.classList.add('hidden');
 	}
 	e.stopPropagation();
+})
+//! Lateral menu
+routeIcon.addEventListener('click', () => {
+	routeIcon.style.display = "none";
+	routeMenu.style.left = '0px';
+})
+closeMenu.addEventListener('click', () => {
+	routeMenu.style.left = '-150px';
+	routeIcon.style.display = "block";
 })
 
 /***********************************************************************************/
