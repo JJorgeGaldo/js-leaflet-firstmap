@@ -93,7 +93,7 @@ header{
 /*! MAP Section */
 .map-wrapper {
     width: 100%;
-    height: 100vh;
+    height: 98vh;
     position: relative;
 }
 /**? Map div */
@@ -262,6 +262,32 @@ header{
 } */
 
 /**! MEDIAQUERIES **/
+
+@media (max-width: 467px) {
+    body{
+        background-image: none;
+    }
+    #map{
+        box-sizing: border-box;
+        height: 100vh;
+        width: 100vw;
+        padding: 6em;
+        overflow: hidden;
+        margin: 0;
+    }
+    .button-wrapper {
+        bottom: 45px;
+        left: 10px;
+        width: 17%;
+    }
+    .button-wrapper div{
+        padding: .2em;
+        border-radius: 5px;
+        font-size: 1.3em;
+        margin-left: 1em;
+    }
+}
+
 @media (max-width: 767px) {
     body{
         background-image: none;
