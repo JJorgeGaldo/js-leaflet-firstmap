@@ -18,43 +18,49 @@ header{
 /* First we set the buttons within the map area */
 .routes {
     position: relative;
-    height: 100%; /* 100% Full-height */
-    width: 150px; /* 0 width - change this with JavaScript */
+    height: 150px; /* 100% Full-height */
+    width: 100%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1000; /* Stay on top */
-    top: 0;
-    left: -150px;
+    z-index: 1010; /* Stay on top */
+    top: -180px;
     background-color: rgba(17, 17, 17,.5); /* Black*/
     color: white;
-    overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 1em; /* Place content 60px from the top */
     transition: .5s; /* 0.5 second transition effect to slide in the sidenav */
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    
-}#routeX{
-    height: 16.67%;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    overflow: auto;
+
+}
+.routeX{
+    background-color: rgba(17, 17, 17,.6);
+    height: 100px;
+    width: 25%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: .3em;
+    margin-left: .1em;
+}
+.routeX:hover{
+    background-color: rgba(164, 67, 82,.7);
     display: flex;
     align-items: center;
 }
-#routeX:hover{
-    background-color: rgba(17, 17, 17,.7);
-}
 .routes li{
     list-style-type: none;
+    width: 100%;
 }
-
-.fa-times{
+/* .fa-times{
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
     margin: .2em;
     align-items: center;
-}
-
-
-
+    z-index: 1020;
+} */
 #cabecera{
     /* position: relative;
     font-family: 'Courier New', Courier, monospace;
@@ -117,7 +123,7 @@ header{
     padding: .3em;
     border-radius: 5px;
     font-weight: bold;
-    color: #B84348;
+    color: #b84348;
     font-size: 1.5em;
 }
 .burger:hover, #weatherIcon:hover{
@@ -141,7 +147,7 @@ header{
     left: 15%;
     width: 70%;
     background-color: white;
-    opacity: .5;
+    opacity: .7;
     z-index: 10000;
 
     /* text-align: center;

@@ -9,8 +9,9 @@ const forecastContainer = document.getElementById('forecastOutline');
 const showForecast = document.getElementById('weatherIcon');
 const routeIcon = document.querySelector(".burger");
 const routeMenu = document.querySelector(".routes");
-const closeMenu = document.querySelector(".fa-times");
+const routeList	= document.querySelectorAll(".routeX");
 let pointsSaved = [];
+let gpx;
 
 
 //! Creating the different map layers: */
@@ -262,15 +263,21 @@ showForecast.addEventListener('click', (e) =>{
 	}
 	e.stopPropagation();
 })
-//! Lateral menu
+//! Routes menu
 routeIcon.addEventListener('click', () => {
-	routeIcon.style.display = "none";
-	routeMenu.style.left = '0px';
+	if(routeMenu.classList.contains("hidden")){
+		routeMenu.style.top = "0px";
+		routeMenu.classList.remove('hidden');
+	}else{
+		routeMenu.style.top = "-180px";
+		routeMenu.classList.add('hidden');
+	}
 })
-closeMenu.addEventListener('click', () => {
-	routeMenu.style.left = '-150px';
-	routeIcon.style.display = "block";
+routeMenu.addEventListener('onfocusout', () => {
+	routeMenu.style.display = "none";
+	routeMenu.classList.add('hidden');
 })
+
 
 /***********************************************************************************/
 /***********************************************************************************/
@@ -304,8 +311,11 @@ mymap.on('click', (e) => {
 	}
 })
 
-/* Selecting the Route to show */
-showBtn.onclick = (e) =>{
+//! Selecting the Route to show: */
+routeMenu.addEventListener('click', (e) =>{
+	console.log(e.target.id);
+	let paint = e.target.id;
+	gpx = "";
 	// First we remove the previous routes
 	mymap.eachLayer(function(layer){
 		layer.remove();
@@ -315,38 +325,52 @@ showBtn.onclick = (e) =>{
 	paintMap();
 
 	e.preventDefault;
-	switch(rutas.value){
-		case '0':
+	switch(paint){
+		/* case '1':
 			paintMap();
 			console.log(gpx);
-			break;
-		case '1':
+			break; */
+		case "route1":
 			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
-			rutas.value = 0;
+			//rutas.value = 0;
+			routeMenu.style.top = "-180px";
+			routeMenu.classList.add('hidden');
 			break;
-		case '2':
+		case 'route2':
 			gpx = './tracks/Viveiro_4Picos.gpx';
-			rutas.value = 0;
+			//rutas.value = 0;
+			routeMenu.style.top = "-180px";
+			routeMenu.classList.add('hidden');
 			break;
-		case '3':
+		case 'route3':
 			gpx = './tracks/Lugo-Castro-Castroverde-Lugo.gpx';
-			rutas.value = 0;
+			//rutas.value = 0;
+			routeMenu.style.top = "-180px";
+			routeMenu.classList.add('hidden');
 			break;
-		case '4':
+		case 'route4':
 			gpx = './tracks/Penarubia-Geodesico.gpx';
-			rutas.value = 0;
+			//rutas.value = 0;
+			routeMenu.style.top = "-180px";
+			routeMenu.classList.add('hidden');
 			break;
-		case '5':
+		case 'route5':
 			gpx = './tracks/RIBADEO-SanCibrao.gpx';
-			rutas.value = 0;
+			//rutas.value = 0;
+			routeMenu.style.top = "-180px";
+			routeMenu.classList.add('hidden');
 			break;
-		case '6':
+		case 'route6':
 			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
-			rutas.value = 0;
+			//rutas.value = 0;
+			routeMenu.style.top = "-180px";
+			routeMenu.classList.add('hidden');
 			break;
 	}
+	routeMenu.style.top = "-180px";
+	routeMenu.classList.add('hidden');
 	drawRoute();
-}
+})
 
 //! Minute weather widget */
 const weatherKey = "vVUOw5LAAnBGLhRmWvz2FRyHX0zFuxPk";
@@ -401,27 +425,8 @@ const drawForecast = (rawData) => {
 				data: arrayForecast,
 				backgroundColor: [
 					'#B84348'
-					/* '#daa940' */
-					/* background: rgb(244,112,4);
-					background: linear-gradient(180deg, rgba(244,112,4,1) 7%, rgba(244,152,4,1) 30%, rgba(215,169,70,1) 70%); */
-					/* 'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.8)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)' */
 				],
-				 /* borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)' 
-				], */
 				fill: true
-				//borderWidth: 1
-				
 			}]
 		},
 		options: {
@@ -441,7 +446,6 @@ const drawForecast = (rawData) => {
 				}
 			}
 		},
-		
 	});
 }
 
