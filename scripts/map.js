@@ -314,8 +314,6 @@ mymap.on('click', (e) => {
 //! Selecting the Route to show: */
 routeMenu.addEventListener('click', (e) =>{
 	console.log(e.target);
-	console.log(e.target.getAttribute('id'));
-	//console.log(routeList[0].getAttribute('id'));
 	let paint = e.target.getAttribute('id');
 	gpx = "";
 	// First we remove the previous routes
@@ -328,43 +326,33 @@ routeMenu.addEventListener('click', (e) =>{
 
 	e.preventDefault;
 	switch(paint){
-		/* case '1':
-			paintMap();
-			console.log(gpx);
-			break; */
 		case "route1":
 			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
-			//rutas.value = 0;
 			routeMenu.style.top = "-180px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route2':
 			gpx = './tracks/Viveiro_4Picos.gpx';
-			//rutas.value = 0;
 			routeMenu.style.top = "-180px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route3':
 			gpx = './tracks/Lugo-Castro-Castroverde-Lugo.gpx';
-			//rutas.value = 0;
 			routeMenu.style.top = "-180px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route4':
 			gpx = './tracks/Penarubia-Geodesico.gpx';
-			//rutas.value = 0;
 			routeMenu.style.top = "-180px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route5':
 			gpx = './tracks/RIBADEO-SanCibrao.gpx';
-			//rutas.value = 0;
 			routeMenu.style.top = "-180px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route6':
 			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
-			//rutas.value = 0;
 			routeMenu.style.top = "-180px";
 			routeMenu.classList.add('hidden');
 			break;
