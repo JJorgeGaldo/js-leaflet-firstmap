@@ -16,37 +16,6 @@ header{
 
 /*! Route menu */
 /* First we set the buttons within the map area */
-.map-wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-.button-wrapper {
-    position: absolute;
-    bottom: 40px;
-    left: 30px;
-    width: 12%;
-    z-index: 1000;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-.button-wrapper div{
-    background-color: rgba(12,12,12,.2);
-    padding: .3em;
-    border-radius: 5px;
-    font-weight: bold;
-    color: #694345;
-    font-size: 1.5em;
-}
-.burger:hover{
-    color: #B84348;
-    cursor: context-menu;
-}
-#weatherIcon:hover{
-    color: #B84348;
-    cursor: pointer;
-}
 .routes {
     position: relative;
     height: 100%; /* 100% Full-height */
@@ -84,7 +53,7 @@ header{
     align-items: center;
 }
 
-/*! Weather widget */
+
 
 #cabecera{
     /* position: relative;
@@ -114,6 +83,14 @@ header{
     text-align: center;
     color: #daa940;
 }
+
+/*! MAP Section */
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+/**? Map div */
 #map{
     box-sizing: border-box;
     height: 95%;
@@ -123,10 +100,64 @@ header{
     border-radius: 5px;
     overflow: hidden;
 }
+
+/**? Option buttons div */
+.button-wrapper {
+    position: absolute;
+    bottom: 40px;
+    left: 30px;
+    width: 12%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.button-wrapper div{
+    background-color: rgba(12,12,12,.2);
+    padding: .3em;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #B84348;
+    font-size: 1.5em;
+}
+.burger:hover, #weatherIcon:hover{
+    background-color: rgba(12,12,12,.3);
+    color: #ec3942;
+    cursor: pointer;
+}
+
+/**? Attribution div */
 #attribution{
     margin-right: 3em;
     margin-bottom: 3em;
 }
+
+/**? Forecast div */
+.forecastContainer{
+    /* height: 2.5em;
+    width: 100%; */
+    position: absolute;
+    top: 15px;
+    left: 15%;
+    width: 70%;
+    background-color: white;
+    opacity: .5;
+    z-index: 10000;
+
+    /* text-align: center;
+    color: white; */
+    display: none;
+}
+#forecast{
+    height: 50px;
+}
+#weather{
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/**? Elevation div */
 #outline{
     margin: 0 auto;
     max-width: 90vw;
@@ -224,26 +255,6 @@ header{
     fill: #78dd9f;
 } */
 
-
-/*! Forecast div */
-.forecastContainer{
-    /* height: 2.5em;
-    width: 100%; */
-    background-color: white;
-    z-index: 10;
-    /* text-align: center;
-    color: white; */
-    display: none;
-}
-#forecast{
-    height: 150px;
-}
-#weather{
-    color: white;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
 /**! MEDIAQUERIES **/
 @media (max-width: 767px) {
     body{
@@ -258,8 +269,8 @@ header{
         margin: 0;
     }
     .button-wrapper {
-        bottom: 20px;
-        left: 20px;
+        bottom: 10px;
+        left: 10px;
         width: 17%;
     }
     .button-wrapper div{
