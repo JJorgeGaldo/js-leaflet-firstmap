@@ -117,6 +117,7 @@ const setPoint = (x,y,t) => {
 	}
 
 	pointsSaved.push(point);
+	console.log(pointsSaved);
 	localStorage.setItem("localStoragedPoints", JSON.stringify(pointsSaved));
 	paintPoint(point);
 	console.log(pointsSaved.length);
@@ -128,17 +129,7 @@ const paintPoint = (obj) => {
 	//.openPopup();
 }
 const paintMap = () => {
-	// The standard OSM map:
-	/* L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		maxZoom: 20,
-		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-		tileSize: 512,
-		zoomOffset: -1,
-		interactive: true,
-		bubblingMouseEvents: true
-	}).addTo(mymap); */
-
-	// Another maps:
+	
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 20,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -151,6 +142,7 @@ const paintMap = () => {
 	}).addTo(mymap);
 
 	L.control.layers(baseMaps).addTo(mymap);
+	console.log(baseMaps);
 
 }
 
