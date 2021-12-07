@@ -8,7 +8,7 @@ const forecast = document.getElementById('forecast').getContext('2d');
 const forecastContainer = document.getElementById('forecastOutline');
 const showForecast = document.getElementById('weatherIcon');
 const routeIcon = document.querySelector(".burger");
-const routeMenu = document.querySelector(".routes");
+const routeMenu = document.getElementById("routes");
 const routeList	= document.querySelectorAll(".routeX");
 let pointsSaved = [];
 let gpx;
@@ -313,8 +313,10 @@ mymap.on('click', (e) => {
 
 //! Selecting the Route to show: */
 routeMenu.addEventListener('click', (e) =>{
-	console.log(e.target.id);
-	let paint = e.target.id;
+	console.log(e.target);
+	console.log(e.target.getAttribute('id'));
+	//console.log(routeList[0].getAttribute('id'));
+	let paint = e.target.getAttribute('id');
 	gpx = "";
 	// First we remove the previous routes
 	mymap.eachLayer(function(layer){
