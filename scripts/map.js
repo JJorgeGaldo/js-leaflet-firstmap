@@ -262,7 +262,7 @@ forecastIcon.addEventListener('click', (e) =>{
 	if(forecastContainer.classList.contains("hidden")){
 		forecastContainer.style.display = "block";
 		forecastContainer.classList.remove('hidden');
-		//getClimate();
+		getClimate();
 	}else{
 		forecastContainer.style.display = "none";
 		forecastContainer.classList.add('hidden');
@@ -274,28 +274,33 @@ const weatherKey = "vVUOw5LAAnBGLhRmWvz2FRyHX0zFuxPk";
 const loc = "43.01007, -7.55834";
 const targetUrl = 'http://dataservice.accuweather.com/forecasts/v1/minute?q=43.01007%2C%20-7.55834&apikey=vVUOw5LAAnBGLhRmWvz2FRyHX0zFuxPk';
 let arrayForecast = [];
+let arrayTest = [];
 let ChartLabel = [];
 
 const getClimate = async () => {
-	const res = await fetch('http://dataservice.accuweather.com/forecasts/v1/minute?q='+loc+'&apikey='+weatherKey+'');
-	const data = await res.json();
-	console.log(data);
-	forecast.textContent = data.Link;
-	drawForecast(data);
+	//const res = await fetch('http://dataservice.accuweather.com/forecasts/v1/minute?q='+loc+'&apikey='+weatherKey+'');
+	//const data = await res.json();
+	//console.log(data);
+	//forecast.textContent = data.Link;
+	drawForecast();
 }
-const drawForecast = (rawData) => {
+const drawForecast = () => {
 	let chartStatus = Chart.getChart('forecast');
 	if (chartStatus != undefined) {
 		chartStatus.destroy();
 	}
 
 	// Array that check the object and extract the minute-by-minute info
-	console.log(rawData.Summaries[1].StartMinute);
+	arrayTest = [0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0];
+	for(i= 0; i<120;i++){
+		ChartLabel.push(i);
+	}
+	/* console.log(rawData.Summaries[1].StartMinute);
 	console.log(rawData.Summaries[1].EndMinute);
 	console.log(rawData.Summaries[1].CountMinute);
 	console.log(rawData.Summaries[1].TypeId);
-	console.log(rawData.Summaries[1].Type);
-	for(let i = 0; i < rawData.Summaries.length; i++){
+	console.log(rawData.Summaries[1].Type); */
+	/* for(let i = 0; i < rawData.Summaries.length; i++){
 		if(rawData.Summaries[i].TypeId == 1){
 			for(let j = rawData.Summaries[i].StartMinute; j <= rawData.Summaries[i].EndMinute; j++){
 				arrayForecast.push(1);
@@ -312,14 +317,14 @@ const drawForecast = (rawData) => {
 			}
 		}
 	}
-
+ */
 	const myChart = new Chart(forecast, {
 		type: 'bar',
 		data: {
 			labels: ChartLabel,
 			datasets: [{
 				label: 'forecast',
-				data: arrayForecast,
+				data: arrayTest,
 				backgroundColor: [
 					'#B84348'
 				],
@@ -420,9 +425,6 @@ routeMenu.addEventListener('click', (e) =>{
 }) */
 
 //* ******************************************************************** */
-
-
-
 
 
 /***********************************************************************************/
