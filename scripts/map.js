@@ -1,17 +1,22 @@
-
-const nomRuta = document.getElementById('nomRuta');
-const rutas = document.getElementById('rutas');
-const showBtn = document.getElementById('show');
-const elevation = document.getElementById('elevation').getContext('2d');
-const elevationContainer = document.getElementById('outline');
-const forecast = document.getElementById('forecast').getContext('2d');
-const forecastContainer = document.getElementById('forecastOutline');
-const showForecast = document.getElementById('weatherIcon');
+// Route Menu
 const routeIcon = document.querySelector(".burger");
 const routeMenu = document.getElementById("routes");
 const routeList	= document.querySelectorAll(".routeX");
+// Forecast Chart
+const forecastIcon = document.getElementById('weatherIcon');
+const forecast = document.getElementById('forecast').getContext('2d');
+const forecastContainer = document.getElementById('forecastOutline');
+// Route Info
+const nomRuta = document.getElementById('nomRuta');
+// Elevation Chart
+const elevationIcon = document.getElementById("elevationIcon");
+const elevation = document.getElementById('elevation').getContext('2d');
+const elevationContainer = document.getElementById('elevationOutline');
+// Other
+const mapDiv = document.getElementById("map");
 let pointsSaved = [];
 let gpx;
+let paint = "";
 
 
 //! Creating the different map layers: */
@@ -174,6 +179,25 @@ const drawRoute = () => {
 }
 
 //! Elevation Chart
+elevationIcon.addEventListener('click', (e) =>{
+	console.log(elevationContainer.offsetHeight);
+	e.preventDefault();
+	console.log(e.target)
+	console.log(forecastContainer.classList.contains("hidden"));
+	console.log(forecastContainer.classList[1]);
+	if(elevationContainer.classList.contains("hidden")){
+		elevationContainer.style.display = "block";
+		mapDiv.style.height = "calc(100vh - "+elevationContainer.offsetHeight+"px)";
+		elevationContainer.style.bottom = "0px";
+		elevationContainer.classList.remove('hidden');
+	}else{
+		elevationContainer.style.bottom = "-200px";
+		elevationContainer.style.display = "none";
+		elevationContainer.classList.add('hidden');
+		mapDiv.style.height = "100vh";
+	}
+	e.stopPropagation();
+})
 const drawElevation = (rawData) => {
 	let chartStatus = Chart.getChart('elevation');
 	if (chartStatus != undefined) {
@@ -199,30 +223,12 @@ const drawElevation = (rawData) => {
 				data: elev,
 				backgroundColor: [
 					gradient
-					/* '#daa940' */
-					/* background: rgb(244,112,4);
-					background: linear-gradient(180deg, rgba(244,112,4,1) 7%, rgba(244,152,4,1) 30%, rgba(215,169,70,1) 70%); */
-					/* 'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.8)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)' */
 				],
-				 /* borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)' 
-				], */
 				fill: true
-				//borderWidth: 1
-				
 			}]
 		},
 		options: {
+			maintainAspectRatio: false,
 			responsive: true,
 			plugins: {
 				legend: {
@@ -246,9 +252,9 @@ const popupText = () => {
 	let text = prompt("Please, intro the message to show here","Hello from here!");
 	return text;
 }
-
+//* ******************************************************************** */
 //! Forecast Chart
-showForecast.addEventListener('click', (e) =>{
+forecastIcon.addEventListener('click', (e) =>{
 	e.preventDefault();
 	console.log(e.target)
 	console.log(forecastContainer.classList.contains("hidden"));
@@ -263,111 +269,6 @@ showForecast.addEventListener('click', (e) =>{
 	}
 	e.stopPropagation();
 })
-//! Routes menu
-routeIcon.addEventListener('click', () => {
-	if(routeMenu.classList.contains("hidden")){
-		routeMenu.style.top = "0px";
-		routeMenu.classList.remove('hidden');
-	}else{
-		routeMenu.style.top = "-200px";
-		routeMenu.classList.add('hidden');
-	}
-})
-routeMenu.addEventListener('onfocusout', () => {
-	routeMenu.style.display = "none";
-	routeMenu.classList.add('hidden');
-})
-
-
-/***********************************************************************************/
-/***********************************************************************************/
-/***********************************************************************************/
-
-/* Landing page map */
-
-document.addEventListener("DOMContentLoaded", () =>{
-	fetchData();
-	paintMap();
-})
-
-/* let array = [{'index': 1,'value': 34},{a:2},{m:3,n:1}];
-console.log(array);
-array.push({r:43,sdf:55});
-console.log(array);
-console.log(array.length); */
-
-L.circle([43.01007, -7.55834], {
-	color: 'red',
-	fillColor: '#f03',
-	fillOpacity: 0.2,
-	radius: 150
-}).addTo(mymap);
-
-mymap.on('click', (e) => {
-	console.log(e.latlng);
-	let textOfPoint = popupText();
-	if(textOfPoint){
-		setPoint(e.latlng.lat, e.latlng.lng, textOfPoint);
-	}
-})
-let paint = "";
-//! Selecting the Route to show: */
-routeMenu.addEventListener('click', (e) =>{
-	let paint = "";
-	console.log(e.target.classList.value);
-	//let paint = e.target.getAttribute('id');
-	if(e.target.classList.contains('routeContainer')){
-		paint = e.target.classList[1];
-	}else{
-		paint = e.target.classList.value;
-	}
-	
-	gpx = "";
-	// First we remove the previous routes
-	mymap.eachLayer(function(layer){
-		layer.remove();
-		//console.log(layer.getPane()); // To show each layer that is rendering
-	});
-	// Now we repaint the map in which we show the route
-	paintMap();
-
-	switch(paint){
-		case 'route1':
-			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
-			break;
-		case 'route2':
-			gpx = './tracks/Viveiro_4Picos.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
-			break;
-		case 'route3':
-			gpx = './tracks/Lugo-Castro-Castroverde-Lugo.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
-			break;
-		case 'route4':
-			gpx = './tracks/Penarubia-Geodesico.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
-			break;
-		case 'route5':
-			gpx = './tracks/RIBADEO-SanCibrao.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
-			break;
-		case 'route6':
-			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
-			break;
-	}
-	routeMenu.style.top = "-200px";
-	routeMenu.classList.add('hidden');
-	drawRoute();
-})
-
 //! Minute weather widget */
 const weatherKey = "vVUOw5LAAnBGLhRmWvz2FRyHX0zFuxPk";
 const loc = "43.01007, -7.55834";
@@ -444,6 +345,121 @@ const drawForecast = (rawData) => {
 		},
 	});
 }
+
+//* ******************************************************************** */
+
+//! Routes menu ***** /
+
+routeIcon.addEventListener('click', () => {
+	if(routeMenu.classList.contains("hidden")){
+		routeMenu.style.top = "0px";
+		routeMenu.classList.remove('hidden');
+	}else{
+		routeMenu.style.top = "-200px";
+		routeMenu.classList.add('hidden');
+	}
+})
+
+//! Selecting the Route to show: */
+routeMenu.addEventListener('click', (e) =>{
+	let paint = "";
+	console.log(e.target.classList.value);
+	//let paint = e.target.getAttribute('id');
+	(e.target.classList.contains('routeContainer'))
+		?paint = e.target.classList[1]
+		:paint = e.target.classList.value;
+	
+	gpx = "";
+	// First we remove the previous routes
+	mymap.eachLayer(function(layer){
+		layer.remove();
+		//console.log(layer.getPane()); // To show each layer that is rendering
+	});
+	// Now we repaint the map in which we show the route
+	paintMap();
+
+	switch(paint){
+		case 'route1':
+			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
+			routeMenu.style.top = "-200px";
+			routeMenu.classList.add('hidden');
+			break;
+		case 'route2':
+			gpx = './tracks/Viveiro_4Picos.gpx';
+			routeMenu.style.top = "-200px";
+			routeMenu.classList.add('hidden');
+			break;
+		case 'route3':
+			gpx = './tracks/Lugo-Castro-Castroverde-Lugo.gpx';
+			routeMenu.style.top = "-200px";
+			routeMenu.classList.add('hidden');
+			break;
+		case 'route4':
+			gpx = './tracks/Penarubia-Geodesico.gpx';
+			routeMenu.style.top = "-200px";
+			routeMenu.classList.add('hidden');
+			break;
+		case 'route5':
+			gpx = './tracks/RIBADEO-SanCibrao.gpx';
+			routeMenu.style.top = "-200px";
+			routeMenu.classList.add('hidden');
+			break;
+		case 'route6':
+			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
+			routeMenu.style.top = "-200px";
+			routeMenu.classList.add('hidden');
+			break;
+	}
+	routeMenu.style.top = "-200px";
+	routeMenu.classList.add('hidden');
+	drawRoute();
+})
+/* routeMenu.addEventListener('onfocusout', () => {
+	routeMenu.style.display = "none";
+	routeMenu.classList.add('hidden');
+}) */
+
+//* ******************************************************************** */
+
+
+
+
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+
+/* Landing page map */
+
+document.addEventListener("DOMContentLoaded", () =>{
+	fetchData();
+	paintMap();
+})
+
+/* let array = [{'index': 1,'value': 34},{a:2},{m:3,n:1}];
+console.log(array);
+array.push({r:43,sdf:55});
+console.log(array);
+console.log(array.length); */
+
+L.circle([43.01007, -7.55834], {
+	color: 'red',
+	fillColor: '#f03',
+	fillOpacity: 0.2,
+	radius: 150
+}).addTo(mymap);
+
+mymap.on('click', (e) => {
+	console.log(e.latlng);
+	let textOfPoint = popupText();
+	if(textOfPoint){
+		setPoint(e.latlng.lat, e.latlng.lng, textOfPoint);
+	}
+})
+
+
+
+
 
 
 /* Different map views from https://docs.mapbox.com/api/maps/styles/

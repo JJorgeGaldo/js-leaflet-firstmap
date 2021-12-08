@@ -11,10 +11,8 @@ header{
     overflow: visible;
 }
 
-/*! Route menu */
-/* First we set the buttons within the map area */
+/*! Routes menu */
 .routes {
-    position: relative;
     height: 150px; /* 100% Full-height */
     width: 100%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -86,10 +84,23 @@ header{
     color: #daa940;
 }
 
+/*! Elevation Chart div */
+#elevationOutline{
+    margin: 0 auto;
+    background-color: white;
+    display: none;
+
+    height: 150px; /* 100% Full-height */
+    width: 98%; /* 0 width - change this with JavaScript */
+    /* position: fixed;  Stay in place */
+    /*z-index: 1010;  Stay on top */
+    bottom: -200px;
+    color: #b84348;
+    transition: .5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
 /*! MAP Section */
 .map-wrapper {
-    width: 100%;
-    height: 98vh;
     position: relative;
 }
 /**? Map div */
@@ -120,7 +131,7 @@ header{
     color: #b84348;
     font-size: 1.5em;
 }
-.burger:hover, #weatherIcon:hover{
+.burger:hover, #weatherIcon:hover, #elevationIcon:hover{
     background-color: rgba(12,12,12,.3);
     color: #ec3942;
     cursor: pointer;
@@ -157,14 +168,6 @@ header{
     margin-top: 20px;
 }
 
-/**? Elevation div */
-#outline{
-    margin: 0 auto;
-    max-width: 90vw;
-    display: none;
-    background-color: white;
-    margin-top: 2vh;
-}
 
 /**! MEDIAQUERIES **/
 
@@ -187,6 +190,10 @@ header{
         border-radius: 5px;
         font-size: 1.3em;
     }
+    #elevationOutline{
+        height: 90px;
+        transition: all .5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
 }
 @media (max-width: 467px) {
     #map{
@@ -207,5 +214,9 @@ header{
         border-radius: 5px;
         font-size: 1.3em;
         margin-left: 1em;
+    }
+    #elevationOutline{
+        height: 80px;
+        transition: all .5s; /* 0.5 second transition effect to slide in the sidenav */
     }
 }

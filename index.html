@@ -11,10 +11,13 @@
 		
 		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
 
+		<!-- Leaf Let -->
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
 		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+		<!-- / -->
+
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
@@ -28,6 +31,7 @@
 		<link rel="stylesheet" href="/css/styles.css">
 	</head>
 	<body>
+		<!-- **! MENU DIV *** -->
 		<div id="routes" class="routes hidden">
 			<div class="routeX" >
 				<div class="routeContainer route1" id="route1">
@@ -42,33 +46,33 @@
 				</div>
 			</div>
 			<div class="routeX" >
-				<div class="routeContainer" id="route3">
-					<img src="./images/favicon.png" alt="Route icon">
-					<p id="route3">Lugo - Castro - Castroverde</p>
+				<div class="routeContainer route3" id="route3">
+					<img src="./images/favicon.png" alt="Route icon" class="route3">
+					<p class="route3" id="route3">Lugo - Castro - Castroverde</p>
 				</div>
 			</div>
 			<div class="routeX" >
-				<div class="routeContainer" id="route4">
-					<img src="./images/favicon.png" alt="Route icon">
-					<p id="route4">Lugo - Penarubia - Geodésico</p>
+				<div class="routeContainer route4" id="route4">
+					<img src="./images/favicon.png" alt="Route icon" class="route4">
+					<p class="route4" id="route4">Lugo - Penarubia - Geodésico</p>
 				</div>
 			</div>
 			<div class="routeX" >
-				<div class="routeContainer" id="route5">
-					<img src="./images/favicon.png" alt="Route icon">
-					<p id="route5">Ribadeo - San Cibrao</p>
+				<div class="routeContainer route5" id="route5">
+					<img src="./images/favicon.png" alt="Route icon" class="route5">
+					<p class="route5" id="route5">Ribadeo - San Cibrao</p>
 				</div>
 			</div>
 			<div class="routeX" >
-				<div class="routeContainer" id="route6">
-					<img src="./images/favicon.png" alt="Route icon">
-					<p id="route6">Lugo - Cádiz</p>
+				<div class="routeContainer route6" id="route6">
+					<img src="./images/favicon.png" alt="Route icon" class="route6">
+					<p class="route6" id="route6">Lugo - Cádiz</p>
 				</div>
 			</div>
 		</div>
-		<!-- <div class="forecastContainer hidden" id="forecastOutline">
-			<canvas id="forecast"></canvas>
-		</div> -->
+		<!-- **! / *** -->
+
+		<!-- **! MAP DIV *** -->
 		<div class="map-wrapper">
 			<div class="forecastContainer hidden" id="forecastOutline">
 				<canvas id="forecast"></canvas>
@@ -77,17 +81,21 @@
 			<div class="button-wrapper">
 				<div class="burger"><a class="fas fa-route"></a></div>
 				<div id="weatherIcon"><a class="fas fa-cloud-sun"></a></div>
-				<div><a class="fas fa-chart-area"></a></div>
+				<div id="elevationIcon"><a class="fas fa-chart-area"></a></div>
 			</div>
 			<div class="routeData">
 				<h1 id="nomRuta"></h1>
 			</div>
 		</div>
-		
+		<!-- **! / *** -->
 
-		<div id="outline">
+		<!-- **! ELEVATION DIV *** -->
+
+		<div class="elevationOutline hidden" id="elevationOutline">
 			<canvas id="elevation"></canvas>
 		</div>
+		<!-- **! / *** -->
+
 		<script src="./scripts/map.js"></script>
 
 	  
