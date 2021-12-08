@@ -106,7 +106,7 @@ header{
     position: absolute;
     bottom: 40px;
     left: 30px;
-    width: 12%;
+    width: 17%;
     z-index: 1000;
     display: flex;
     flex-direction: row;
@@ -180,7 +180,7 @@ header{
     .button-wrapper {
         bottom: 10px;
         left: 10px;
-        width: 17%;
+        width: 25%;
     }
     .button-wrapper div{
         padding: .2em;

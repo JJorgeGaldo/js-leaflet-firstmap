@@ -310,11 +310,18 @@ mymap.on('click', (e) => {
 		setPoint(e.latlng.lat, e.latlng.lng, textOfPoint);
 	}
 })
-
+let paint = "";
 //! Selecting the Route to show: */
 routeMenu.addEventListener('click', (e) =>{
-	console.log(e.target);
-	let paint = e.target.getAttribute('id');
+	let paint = "";
+	console.log(e.target.classList.value);
+	//let paint = e.target.getAttribute('id');
+	if(e.target.classList.contains('routeContainer')){
+		paint = e.target.classList[1];
+	}else{
+		paint = e.target.classList.value;
+	}
+	
 	gpx = "";
 	// First we remove the previous routes
 	mymap.eachLayer(function(layer){
@@ -324,9 +331,8 @@ routeMenu.addEventListener('click', (e) =>{
 	// Now we repaint the map in which we show the route
 	paintMap();
 
-	e.preventDefault;
 	switch(paint){
-		case "route1":
+		case 'route1':
 			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
 			routeMenu.style.top = "-200px";
 			routeMenu.classList.add('hidden');
