@@ -286,6 +286,7 @@ const getClimate = async () => {
 }
 const drawForecast = () => {
 	let chartStatus = Chart.getChart('forecast');
+	ChartLabel = [];
 	if (chartStatus != undefined) {
 		chartStatus.destroy();
 	}
