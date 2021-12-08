@@ -269,7 +269,7 @@ routeIcon.addEventListener('click', () => {
 		routeMenu.style.top = "0px";
 		routeMenu.classList.remove('hidden');
 	}else{
-		routeMenu.style.top = "-180px";
+		routeMenu.style.top = "-200px";
 		routeMenu.classList.add('hidden');
 	}
 })
@@ -328,36 +328,36 @@ routeMenu.addEventListener('click', (e) =>{
 	switch(paint){
 		case "route1":
 			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
-			routeMenu.style.top = "-180px";
+			routeMenu.style.top = "-200px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route2':
 			gpx = './tracks/Viveiro_4Picos.gpx';
-			routeMenu.style.top = "-180px";
+			routeMenu.style.top = "-200px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route3':
 			gpx = './tracks/Lugo-Castro-Castroverde-Lugo.gpx';
-			routeMenu.style.top = "-180px";
+			routeMenu.style.top = "-200px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route4':
 			gpx = './tracks/Penarubia-Geodesico.gpx';
-			routeMenu.style.top = "-180px";
+			routeMenu.style.top = "-200px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route5':
 			gpx = './tracks/RIBADEO-SanCibrao.gpx';
-			routeMenu.style.top = "-180px";
+			routeMenu.style.top = "-200px";
 			routeMenu.classList.add('hidden');
 			break;
 		case 'route6':
 			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
-			routeMenu.style.top = "-180px";
+			routeMenu.style.top = "-200px";
 			routeMenu.classList.add('hidden');
 			break;
 	}
-	routeMenu.style.top = "-180px";
+	routeMenu.style.top = "-200px";
 	routeMenu.classList.add('hidden');
 	drawRoute();
 })

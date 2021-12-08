@@ -19,10 +19,10 @@ header{
     width: 100%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 1010; /* Stay on top */
-    top: -180px;
+    top: -200px;
     background-color: rgba(17, 17, 17,.5); /* Black*/
-    color: white;
-    padding-top: 1em; /* Place content 60px from the top */
+    color: #b84348;
+    padding-top: 2.2em; /* Place content 60px from the top */
     transition: .5s; /* 0.5 second transition effect to slide in the sidenav */
     display: flex;
     flex-flow: row wrap;
@@ -32,7 +32,7 @@ header{
 
 }
 .routeX{
-    background-color: rgba(17, 17, 17,.6);
+    background-color: rgba(255, 251, 251, 0.9);
     height: 100px;
     width: 25%;
     min-width: 70px;
@@ -46,48 +46,39 @@ header{
     margin-bottom: .3em;
     margin-left: .1em;
 }
-.routeX:hover{
-    background-color: rgba(164, 67, 82,.7);
+
+.routeContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-overflow: wrap;
+    /* opacity: 0; */
+}
+.routeContainer img{
+    height: 50px;
+    width: 50px;
+    transition: transform .1s;
+    /* */
+}
+.routeContainer:hover{
+    /* background-color: rgba(164, 67, 82,.5); */
+    /* background-color: rgba(255, 251, 251, 0.5); */
     display: flex;
     align-items: center;
 }
+.routeContainer:hover img, .routeContainer:hover p{
+    transform: scale(1.1); 
+}
 .routes p{
+    font-weight: bold;
     margin: 0;
-    width: 100%;
-    height: 100%;
-    line-height: 100px;
-    text-align: center;
+    transition: transform .1s;
 }
-/* .fa-times{
-    position: absolute;
-    right: 10px;
-    top: 0;
-    margin: .2em;
-    align-items: center;
-    z-index: 1020;
-} */
-#cabecera{
-    /* position: relative;
-    font-family: 'Courier New', Courier, monospace;
-    color: #daa940; */
-    margin: 0;
-    padding: 1em 0;
-    text-align: center;
-    overflow: visible;  
-}
-.textCabecera{
-    color: #B84348;
-    color: aliceblue;
-}
-/* #show{
-    background-color: ;
-    box-sizing: border-box;
-    border-radius: 10%;
-    overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
-    color: beige;
 
-} */
 #nomRuta{
     display: none;
     margin: 0;
@@ -175,118 +166,7 @@ header{
     margin-top: 2vh;
 }
 
-/*! Show button */
-.button {
-	display: block;
-    width: 220px;
-    max-width: 100%;
-    margin: 0 auto;
-    margin-top: 2vh;
-    margin-bottom: 0;
-    overflow: hidden;
-    position: relative;
-    transform: translatez(0);
-    text-decoration: none;
-    box-sizing: border-box;
-    font-size: 1.1em;
-	font-weight: bold;
-	box-shadow: 0 9px 18px rgba(0,0,0,0.2);
-}
-
-.instagram {
-	text-align: center;
-	border-radius: 50px;
-    padding: 2vh;
-    color: white;
-    /* background: #daa940; */
-    background: #daa940;
-    transition: all 0.1s ease-out 0s;
-}
-
-.gradient {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    bottom: auto;
-    margin: auto;
-    z-index: -1;
-    background: radial-gradient(90px circle at top center, rgba(238,88,63,.8) 30%, rgba(255,255,255,0));
-    transition: all 0s ease-out 0s;
-	transform: translatex(-140px);
-	animation: 10s linear 0s infinite move;
-}
-
-@keyframes move {
-	0% {
-		transform: translatex(-140px);
-	}
-	25% {
-		transform: translatex(140px);
-		opacity: 0.3;
-	}
-	50% {
-		transform: translatex(140px);
-		opacity: 1;
-		background: radial-gradient(90px circle at bottom center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
-	}
-	75% {
-		transform: translatex(-140px);
-		opacity: 0.3;
-	}
-	100% {
-		opacity: 1;
-		transform: translatex(-140px);
-		background: radial-gradient(90px circle at top center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
-	}
-}
-
-/*! Curves Design **/
-/* .custom-shape-divider-top-1638356510 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1638356510 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 73px;
-}
-
-.custom-shape-divider-top-1638356510 .shape-fill {
-    fill: #78dd9f;
-} */
-
 /**! MEDIAQUERIES **/
-
-@media (max-width: 467px) {
-    #map{
-        box-sizing: border-box;
-        height: 100vh;
-        width: 100vw;
-        padding: 6em;
-        overflow: hidden;
-        margin: 0;
-    }
-    .button-wrapper {
-        bottom: 45px;
-        left: 10px;
-        width: 17%;
-    }
-    .button-wrapper div{
-        padding: .2em;
-        border-radius: 5px;
-        font-size: 1.3em;
-        margin-left: 1em;
-    }
-}
 
 @media (max-width: 767px) {
     #map{
@@ -306,5 +186,26 @@ header{
         padding: .2em;
         border-radius: 5px;
         font-size: 1.3em;
+    }
+}
+@media (max-width: 467px) {
+    #map{
+        box-sizing: border-box;
+        height: 100vh;
+        width: 100vw;
+        padding: 6em;
+        overflow: hidden;
+        margin: 0;
+    }
+    .button-wrapper {
+        bottom: 15px;
+        left: 20px;
+        width: 25%;
+    }
+    .button-wrapper div{
+        padding: .2em;
+        border-radius: 5px;
+        font-size: 1.3em;
+        margin-left: 1em;
     }
 }
