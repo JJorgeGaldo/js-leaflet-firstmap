@@ -173,10 +173,8 @@ const drawRoute = () => {
 		if(Math.floor(e.target._info.elevation.gain)){
 			drawElevation(e.target._info.elevation._points);
 			elevationIcon.classList.add('show');
-			elevationIcon.style.color = '#b84348';
 		}else{
 			elevationIcon.classList.remove('show');
-			elevationIcon.style.color = '#ccc';
 		}
 		
 	}).addTo(mymap);

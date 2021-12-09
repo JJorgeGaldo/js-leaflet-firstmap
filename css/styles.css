@@ -135,7 +135,15 @@ header{
 #elevationIcon{
     color: #5c5959;
 }
-.burger:hover, #weatherIcon:hover, #elevationIcon:hover{
+#elevationIcon.show{
+    color: #b84348;
+}
+/* #elevationIcon.show:hover{
+    background-color: rgba(12,12,12,.3);
+    color: #ec3942;
+    cursor: pointer;
+} */
+.burger:hover, #weatherIcon:hover, #elevationIcon.show:hover{
     background-color: rgba(12,12,12,.3);
     color: #ec3942;
     cursor: pointer;
