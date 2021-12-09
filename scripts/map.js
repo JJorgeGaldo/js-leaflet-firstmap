@@ -72,7 +72,7 @@ let
 		bubblingMouseEvents: true
 	});
 //! Initializing the map:
-var mymap = L.map('map').setView([43.01007, -7.55834], 17, [outdoors,streets,dark,satelliteStreets,navigationDay]);
+var mymap = L.map('map').setView([43.01007, -7.55834], 15, [outdoors,streets,dark,satelliteStreets,navigationDay]);
 
 //!Creating the map layer selector:
 var baseMaps = {
@@ -146,10 +146,6 @@ const paintMap = () => {
 		interactive: true,
 		bubblingMouseEvents: true
 	}).addTo(mymap);
-
-	L.control.layers(baseMaps).addTo(mymap);
-	console.log(baseMaps);
-
 }
 
 const drawRoute = () => {
@@ -164,15 +160,23 @@ const drawRoute = () => {
 	});
 	
 	route.on('loaded', function(e) {
-		console.log(e.target);
-		mymap.fitBounds(e.target.getBounds());
+		// Here we modify the bounds for managing the initial zoom of the route
+		let bounds = e.target.getBounds();
+		bounds._northEast.lat += /* e.target.getBounds()._northEast.lat + */ .05;
+		bounds._northEast.lng += /* e.target.getBounds()._northEast.lat + */ .04;
+		bounds._southWest.lat -= /* e.target.getBounds()._southWest.lng - */ .05;
+		bounds._southWest.lng -= /* e.target.getBounds()._southWest.lng - */ .04;
+		
+		mymap.fitBounds(bounds);
 		nomRuta.textContent=e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
 		
 		if(Math.floor(e.target._info.elevation.gain)){
-			elevationContainer.style.display = "block";
 			drawElevation(e.target._info.elevation._points);
+			elevationIcon.classList.add('show');
+			elevationIcon.style.color = '#b84348';
 		}else{
-			elevationContainer.style.display = "none";
+			elevationIcon.classList.remove('show');
+			elevationIcon.style.color = '#ccc';
 		}
 		
 	}).addTo(mymap);
@@ -180,24 +184,26 @@ const drawRoute = () => {
 
 //! Elevation Chart
 elevationIcon.addEventListener('click', (e) =>{
-	console.log(elevationContainer.offsetHeight);
-	e.preventDefault();
-	console.log(e.target)
-	console.log(forecastContainer.classList.contains("hidden"));
-	console.log(forecastContainer.classList[1]);
-	if(elevationContainer.classList.contains("hidden")){
-		elevationContainer.style.display = "block";
-		mapDiv.style.height = "calc(100vh - "+elevationContainer.offsetHeight+"px)";
-		elevationContainer.style.bottom = "0px";
-		elevationContainer.classList.remove('hidden');
-	}else{
-		elevationContainer.style.bottom = "-200px";
-		elevationContainer.style.display = "none";
-		elevationContainer.classList.add('hidden');
-		mapDiv.style.height = "100vh";
+	if(elevationIcon.classList.contains("show")){
+		console.log(elevationContainer.offsetHeight);
+		e.preventDefault();
+		console.log(e.target)
+		if(elevationContainer.classList.contains("hidden")){
+			elevationContainer.style.display = "block";
+			mapDiv.style.height = "calc(100vh - "+elevationContainer.offsetHeight+"px)";
+			elevationContainer.style.bottom = "0px";
+			elevationContainer.classList.remove('hidden');
+		}else{
+			elevationContainer.style.bottom = "-200px";
+			elevationContainer.style.display = "none";
+			elevationContainer.classList.add('hidden');
+			mapDiv.style.height = "100vh";
+		}	
 	}
+	
 	e.stopPropagation();
 })
+
 const drawElevation = (rawData) => {
 	let chartStatus = Chart.getChart('elevation');
 	if (chartStatus != undefined) {
@@ -387,33 +393,21 @@ routeMenu.addEventListener('click', (e) =>{
 	switch(paint){
 		case 'route1':
 			gpx = './tracks/Viveiro_Bares.gpx'; // URL to your GPX file or the GPX itself
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
 			break;
 		case 'route2':
 			gpx = './tracks/Viveiro_4Picos.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
 			break;
 		case 'route3':
 			gpx = './tracks/Lugo-Castro-Castroverde-Lugo.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
 			break;
 		case 'route4':
 			gpx = './tracks/Penarubia-Geodesico.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
 			break;
 		case 'route5':
 			gpx = './tracks/RIBADEO-SanCibrao.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
 			break;
 		case 'route6':
 			gpx = './tracks/LUGO_SANT_PORTUGAL_CADIZ.gpx';
-			routeMenu.style.top = "-200px";
-			routeMenu.classList.add('hidden');
 			break;
 	}
 	routeMenu.style.top = "-200px";
@@ -437,6 +431,8 @@ routeMenu.addEventListener('click', (e) =>{
 document.addEventListener("DOMContentLoaded", () =>{
 	fetchData();
 	paintMap();
+	L.control.layers(baseMaps).addTo(mymap);
+	console.log(baseMaps);
 })
 
 /* let array = [{'index': 1,'value': 34},{a:2},{m:3,n:1}];

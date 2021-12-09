@@ -18,7 +18,8 @@ header{
     position: fixed; /* Stay in place */
     z-index: 1010; /* Stay on top */
     top: -200px;
-    background-color: rgba(17, 17, 17,.5); /* Black*/
+    /* background-color: rgba(17, 17, 17,.5);  Black*/
+    background-color: rgba(243, 240, 240, .8); /* Black*/
     color: #b84348;
     padding-top: 2.2em; /* Place content 60px from the top */
     transition: .5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -30,7 +31,7 @@ header{
 
 }
 .routeX{
-    background-color: rgba(255, 251, 251, 0.9);
+    /* background-color: rgba(255, 251, 251, 0.9); */
     height: 100px;
     width: 25%;
     min-width: 70px;
@@ -124,12 +125,15 @@ header{
     justify-content: space-around;
 }
 .button-wrapper div{
-    background-color: rgba(12,12,12,.2);
+    background-color: rgba(12,12,12,.4);
     padding: .3em;
     border-radius: 5px;
     font-weight: bold;
     color: #b84348;
     font-size: 1.5em;
+}
+#elevationIcon{
+    color: #5c5959;
 }
 .burger:hover, #weatherIcon:hover, #elevationIcon:hover{
     background-color: rgba(12,12,12,.3);
