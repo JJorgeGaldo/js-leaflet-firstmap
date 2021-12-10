@@ -182,7 +182,6 @@ const drawRoute = () => {
 		}else{
 			elevationIcon.classList.remove('show');
 		}
-		
 	}).addTo(mymap);
 }
 
@@ -203,7 +202,6 @@ routeInfoIcon.addEventListener('click', () => {
 		arrowDown.style.display = "block";
 		mapDiv.style.height = "100vh";
 	}
-	
 })
 
 //! Elevation Chart
@@ -224,7 +222,6 @@ elevationIcon.addEventListener('click', (e) =>{
 			mapDiv.style.height = "100vh";
 		}	
 	}
-	
 	e.stopPropagation();
 })
 
@@ -274,7 +271,6 @@ const drawElevation = (rawData) => {
 				}
 			}
 		},
-		
 	});
 }
 
