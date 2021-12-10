@@ -78,11 +78,49 @@ header{
     transition: transform .1s;
 }
 
-#nomRuta{
-    display: none;
-    margin: 0;
+/** End of Route Container */
+
+/*! Route Data Div */
+#showRouteData{
+    position: absolute;
+    /* height: 1em; */
+    width: 4em;
+    top: 0;
+    left: 50%;
+    margin: 0 auto;
+    font-size: 1em;
+    font-weight: bold;
+    color: #b84348;
+    background-color: white;
+    border: 2px solid #b84348;
+    border-radius: 0 0 5px 5px;
+    z-index: 1000;
     text-align: center;
-    color: #daa940;
+    vertical-align: middle;
+}
+#showRouteData:hover{
+    background-color: #b84348;
+    color: white;
+    cursor: pointer;
+}
+.fa-chevron-up{
+    display: none;
+}
+#routeData{
+    margin: 0 auto;
+    display: none;
+    background-color: #E6E4E0;
+    height: 70px;
+    width: 100vw;
+    padding-top: .3em;
+    top: -150px;
+    color: #b84348;
+    transition: .5s;
+}
+#nomRuta, #datRuta{
+    margin: 0 auto;
+    margin-bottom: .3em;
+    text-align: center;
 }
 
 /*! Elevation Chart div */
@@ -91,10 +129,8 @@ header{
     background-color: white;
     display: none;
 
-    height: 150px; /* 100% Full-height */
-    width: 98%; /* 0 width - change this with JavaScript */
-    /* position: fixed;  Stay in place */
-    /*z-index: 1010;  Stay on top */
+    height: 150px;
+    width: 98%;
     bottom: -200px;
     color: #b84348;
     transition: .5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -138,11 +174,6 @@ header{
 #elevationIcon.show{
     color: #b84348;
 }
-/* #elevationIcon.show:hover{
-    background-color: rgba(12,12,12,.3);
-    color: #ec3942;
-    cursor: pointer;
-} */
 .burger:hover, #weatherIcon:hover, #elevationIcon.show:hover{
     background-color: rgba(12,12,12,.3);
     color: #ec3942;

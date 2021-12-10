@@ -31,7 +31,7 @@
 		<link rel="stylesheet" href="/css/styles.css">
 	</head>
 	<body>
-		<!-- **! MENU DIV *** -->
+		<!-- MENU DIV *** -->
 		<div id="routes" class="routes hidden">
 			<div class="routeX" >
 				<div class="routeContainer route1" id="route1">
@@ -70,10 +70,18 @@
 				</div>
 			</div>
 		</div>
-		<!-- **! / *** -->
+		<!-- ** / *** -->
 
-		<!-- **! MAP DIV *** -->
+		<!-- ROUTE DATA DIV -->
+		<div id="routeData" class="hidden">
+			<h2 id="nomRuta"></h2>
+			<h3 id="datRuta"></h3>
+		</div>
+		<!-- ** / *** -->
+
+		<!-- MAP DIV *** -->
 		<div class="map-wrapper">
+			<div id="showRouteData"><i class="fas fa-chevron-down"></i> <i class="fas fa-chevron-up"></i></div>
 			<div class="forecastContainer hidden" id="forecastOutline">
 				<canvas id="forecast"></canvas>
 			</div>
@@ -83,18 +91,14 @@
 				<div id="weatherIcon"><a class="fas fa-cloud-sun"></a></div>
 				<div id="elevationIcon"><a class="fas fa-chart-area"></a></div>
 			</div>
-			<div class="routeData">
-				<h1 id="nomRuta"></h1>
-			</div>
 		</div>
-		<!-- **! / *** -->
+		<!-- ** / *** -->
 
-		<!-- **! ELEVATION DIV *** -->
-
+		<!-- ELEVATION DIV *** -->
 		<div class="elevationOutline hidden" id="elevationOutline">
 			<canvas id="elevation"></canvas>
 		</div>
-		<!-- **! / *** -->
+		<!-- ** / *** -->
 
 		<script src="./scripts/map.js"></script>
 

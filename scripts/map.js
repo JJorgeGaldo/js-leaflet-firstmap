@@ -7,7 +7,12 @@ const forecastIcon = document.getElementById('weatherIcon');
 const forecast = document.getElementById('forecast').getContext('2d');
 const forecastContainer = document.getElementById('forecastOutline');
 // Route Info
+const routeInfoIcon = document.getElementById("showRouteData");
 const nomRuta = document.getElementById('nomRuta');
+const dataRuta = document.getElementById('datRuta');
+const routeDataContainer = document.getElementById("routeData");
+const arrowUp = document.querySelector(".fa-chevron-up");
+const arrowDown = document.querySelector(".fa-chevron-down");
 // Elevation Chart
 const elevationIcon = document.getElementById("elevationIcon");
 const elevation = document.getElementById('elevation').getContext('2d');
@@ -168,7 +173,8 @@ const drawRoute = () => {
 		bounds._southWest.lng -= /* e.target.getBounds()._southWest.lng - */ .04;
 		
 		mymap.fitBounds(bounds);
-		nomRuta.textContent=e.target._info.name+" || Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
+		nomRuta.textContent=e.target._info.name;
+		dataRuta.textContent = "Distancia: "+((e.target._info.length)/1000).toFixed(2)+" Kms || Desnivel: "+((e.target._info.elevation.gain)).toFixed(2)+" mts";
 		
 		if(Math.floor(e.target._info.elevation.gain)){
 			drawElevation(e.target._info.elevation._points);
@@ -179,6 +185,26 @@ const drawRoute = () => {
 		
 	}).addTo(mymap);
 }
+
+//! Route Data
+routeInfoIcon.addEventListener('click', () => {
+	if(routeDataContainer.classList.contains('hidden')){
+		routeDataContainer.style.display = "block";
+		routeDataContainer.classList.remove('hidden');
+		routeDataContainer.style.top = '0px';
+		mapDiv.style.height = "calc(100vh - "+routeDataContainer.offsetHeight+"px)";
+		arrowDown.style.display = "none";
+		arrowUp.style.display = "block";
+	}else{
+		routeDataContainer.classList.add('hidden');
+		routeDataContainer.style.top = '-300px';
+		routeDataContainer.style.display = "none";
+		arrowUp.style.display = "none";
+		arrowDown.style.display = "block";
+		mapDiv.style.height = "100vh";
+	}
+	
+})
 
 //! Elevation Chart
 elevationIcon.addEventListener('click', (e) =>{
